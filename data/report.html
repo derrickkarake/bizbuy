@@ -1,380 +1,696 @@
 <!doctype html>
-<html><head><meta charset="utf-8"/>
-<title>BizBuySell first-pass report (rubric v2)</title>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BizBuySell Acquisition Targets — Rubric v2</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
-  body { font: 14px/1.5 -apple-system, system-ui, sans-serif; max-width: 1200px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-  h1 { font-size: 1.5rem; } h2 { margin-top: 2.5rem; border-bottom: 1px solid #ddd; padding-bottom: .3rem; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; background: #fafafa; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 13px; }
-  th, td { padding: 6px 10px; border-bottom: 1px solid #eee; text-align: left; }
-  th { background: #f4f4f4; cursor: pointer; user-select: none; position: sticky; top: 0; }
-  th:hover { background: #e8e8e8; }
-  tr:hover { background: #fffbe8; }
-  .num { text-align: right; font-variant-numeric: tabular-nums; }
-  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 11px; background: #e8f0ff; color: #1746a2; margin-right: 3px; }
-  .pill.red { background: #ffe8e8; color: #a21717; }
-  .pill.warn { background: #fff4e0; color: #7a4d00; }
-  .score { font-weight: 600; font-size: 15px; padding: 2px 8px; border-radius: 4px; display: inline-block; min-width: 28px; text-align: center; }
-  .score.hi { background: #d4edda; color: #155724; }
-  .score.mid { background: #fff3cd; color: #7a4d00; }
-  .score.lo { background: #f1f1f1; color: #555; }
-  .muted { color: #888; }
-  a { color: #1746a2; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  canvas { max-height: 260px; }
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --accent: #1746a2;
+    --hi: #16a34a;
+    --mid-hi: #65a30d;
+    --mid: #ca8a04;
+    --lo: #9ca3af;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font: 14px/1.5 -apple-system, "SF Pro Text", system-ui, sans-serif;
+    margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  header { margin-bottom: 1.5rem; }
+  h1 { font-size: 1.6rem; font-weight: 650; margin: 0 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 13px; }
+  h2 { font-size: 1.05rem; font-weight: 600; margin: 2.5rem 0 .75rem; letter-spacing: -0.005em; }
+  h2 .count { color: var(--muted); font-weight: 400; font-size: 0.9em; margin-left: .4rem; }
+
+  /* KPI strip */
+  .kpi-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem;
+    margin: 0 0 1.25rem;
+  }
+  .kpi {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: .75rem .9rem;
+  }
+  .kpi .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .kpi .value { font-size: 1.35rem; font-weight: 600; margin-top: .15rem; letter-spacing: -0.01em; }
+
+  /* Filters */
+  .toolbar {
+    display: flex; gap: .5rem; flex-wrap: wrap; align-items: center;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px 8px 0 0; border-bottom: none;
+    padding: .6rem .75rem;
+  }
+  .toolbar input, .toolbar select {
+    font: inherit; padding: .35rem .55rem;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: #fff; color: var(--text);
+  }
+  .toolbar input { min-width: 200px; }
+  .toolbar .count-live { color: var(--muted); margin-left: auto; font-size: 12px; }
+  .toolbar label { display: flex; align-items: center; gap: .3rem; font-size: 12px; color: var(--muted); }
+
+  /* Table */
+  .table-wrap {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px; overflow: auto; max-height: 75vh;
+  }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th {
+    background: #f8fafc; font-weight: 600; font-size: 12px;
+    cursor: pointer; user-select: none; position: sticky; top: 0; z-index: 2;
+    border-bottom: 1px solid var(--border);
+  }
+  th:hover { background: #eef2f7; }
+  th.sorted::after { content: " ↓"; color: var(--accent); font-weight: 700; }
+  th.sorted.asc::after { content: " ↑"; }
+  tr:hover td { background: #fffbea; }
+  tr:last-child td { border-bottom: none; }
+  td.rank { color: var(--muted); font-variant-numeric: tabular-nums; width: 36px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.title-cell { max-width: 380px; }
+  td.title-cell a { color: var(--accent); text-decoration: none; }
+  td.title-cell a:hover { text-decoration: underline; }
+
+  .state { font-variant: small-caps; color: var(--muted); font-size: 12px; letter-spacing: 0.03em; }
+
+  .score {
+    display: inline-block; min-width: 30px; padding: 2px 8px;
+    border-radius: 4px; font-weight: 600; font-size: 13px; text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .score.hi { background: #dcfce7; color: #14532d; }
+  .score.mid-hi { background: #ecfccb; color: #365314; }
+  .score.mid { background: #fef3c7; color: #713f12; }
+  .score.lo { background: #f3f4f6; color: #4b5563; }
+
+  .ind-pill {
+    display: inline-block; padding: 1px 7px; border-radius: 10px;
+    font-size: 11px; font-weight: 500; border: 1px solid;
+    white-space: nowrap;
+  }
+  .pill {
+    display: inline-block; padding: 1px 6px; border-radius: 10px;
+    font-size: 10.5px; margin: 1px 2px 1px 0; white-space: nowrap;
+  }
+  .pill.red { background: #fee2e2; color: #991b1b; }
+  .pill.warn { background: #fef3c7; color: #713f12; }
+  .pill.ok { background: #d1fae5; color: #065f46; }
+  .pill.muted { background: #f3f4f6; color: #6b7280; }
+  .muted { color: var(--muted); }
+
+  /* Charts section */
+  .charts {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem;
+  }
+  .chart-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: .9rem 1rem .5rem;
+  }
+  .chart-card h3 {
+    font-size: 12px; margin: 0 0 .4rem; font-weight: 600;
+    color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  canvas { max-height: 220px; }
+
+  details.methodology {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: .75rem 1rem; margin-top: 2rem;
+  }
+  details.methodology summary {
+    cursor: pointer; font-weight: 600; font-size: 13px;
+  }
+  details.methodology ul { font-size: 13px; color: var(--text); margin: .5rem 0 0; }
+
+  @media (max-width: 900px) {
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .charts { grid-template-columns: 1fr; }
+    td.title-cell { max-width: 200px; }
+  }
 </style></head>
 <body>
+<div class="wrap">
 
-<h1>BizBuySell first-pass report — rubric v2</h1>
-<p class="muted">Generated 4/16/2026, 11:36:29 PM · 160 scored listings · OK/TX/AR × 6 industries · card-level data only (detail blocked by rate limit)</p>
+<header>
+  <h1>BizBuySell Acquisition Targets</h1>
+  <div class="sub">Rubric v2 · 169 listings · OK/TX/AR scrape + memo additions · generated Apr 17, 2026</div>
+</header>
 
-<h2>Snapshot</h2>
-<div class="grid">
-  <div class="card"><strong>Totals</strong><br>
-    <div>Unique listings: <b>160</b></div>
-    <div>With cash flow: <b>110</b></div>
-    <div>With asking price: <b>0</b></div>
-    <div>Deferred (no price): <b>160</b></div>
-  </div>
-  <div class="card"><strong>Top score</strong><br>
-    <div>Max: <b>44</b></div>
-    <div>Median: <b>13</b></div>
-    <div>Mean: <b>19.0</b></div>
-  </div>
+<div class="kpi-strip">
+  <div class="kpi"><div class="label">Listings</div><div class="value">169</div></div>
+  <div class="kpi"><div class="label">Top score</div><div class="value">84</div></div>
+  <div class="kpi"><div class="label">With asking price</div><div class="value">10</div></div>
+  <div class="kpi"><div class="label">With cash flow</div><div class="value">119</div></div>
+  <div class="kpi"><div class="label">Memo-verified</div><div class="value">10</div></div>
 </div>
 
-<h2>Score distribution</h2>
-<div class="card"><canvas id="histChart"></canvas></div>
+<h2>Top 30 ranked<span class="count">by rubric v2 score</span></h2>
 
-<h2>By state</h2>
-<div class="grid">
-  <div class="card"><canvas id="stateChart"></canvas></div>
-  <div class="card"><canvas id="indChart"></canvas></div>
+<div class="toolbar">
+  <input id="searchInput" placeholder="Filter by title, location, flag…"/>
+  <select id="stateFilter">
+    <option value="">All states</option>
+    <option value="arkansas">arkansas</option><option value="california">california</option><option value="florida">florida</option><option value="kansas">kansas</option><option value="massachusetts">massachusetts</option><option value="new-york">new-york</option><option value="ohio">ohio</option><option value="oklahoma">oklahoma</option><option value="texas">texas</option><option value="virginia">virginia</option>
+  </select>
+  <select id="industryFilter">
+    <option value="">All industries</option>
+    <option value="building-and-construction">building-and-construction</option><option value="cleaning">cleaning</option><option value="electrical">electrical</option><option value="hvac">hvac</option><option value="landscaping">landscaping</option><option value="pest-control">pest-control</option><option value="plumbing">plumbing</option><option value="service">service</option>
+  </select>
+  <label><input type="checkbox" id="memoOnly"/> memo-verified only</label>
+  <span class="count-live" id="countLive">showing 30 of 169</span>
 </div>
 
-<h2>Top 30</h2>
+<div class="table-wrap">
 <table id="topTable">
 <thead><tr>
-  <th>#</th><th>score</th><th>state</th><th>industry</th>
-  <th class="num">cash flow</th><th class="num">asking</th>
-  <th class="num">SDE mult</th><th>location</th><th>title</th><th>flags</th>
+  <th data-sort="rank">#</th>
+  <th data-sort="score" class="sorted">score</th>
+  <th data-sort="industry">industry</th>
+  <th data-sort="state">state</th>
+  <th data-sort="cf" class="num">cash flow</th>
+  <th data-sort="ask" class="num">asking</th>
+  <th data-sort="mult" class="num">SDE mult</th>
+  <th data-sort="marg" class="num">margin</th>
+  <th data-sort="loc">location</th>
+  <th data-sort="title">title</th>
+  <th>flags</th>
 </tr></thead>
 <tbody>
-<tr>
-      <td>1</td>
-      <td><span class="score hi">44</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Lubbock, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/" target="_blank">Turnkey Aircraft Detailing Business – Recurring Contracts</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>2</td>
-      <td><span class="score hi">37</span></td>
-      <td>texas</td><td>service</td>
-      <td class="num">$103,549</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Corpus Christi, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/" target="_blank">Great Corpus Christi turnkey pool route</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>3</td>
-      <td><span class="score hi">37</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num">$294,948</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Dallas, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/high-vol-and-absentee-dry-cleaners-w-property-in-dallas-uptown/2289440/" target="_blank">High Vol & Absentee Dry Cleaners /w Property in Dallas Uptown</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>4</td>
-      <td><span class="score hi">37</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num">$370,611</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Fort Worth, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/" target="_blank">Profitable Pressure Washing Business: Turnkey</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>5</td>
-      <td><span class="score hi">35</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Fort Worth, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/swimming-pool-cleaning-and-repair-route/2369806/" target="_blank">Swimming Pool Cleaning and Repair Route</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>6</td>
-      <td><span class="score mid">34</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Southlake, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/profitable-residential-cleaning-company-with-recurring-revenue/2494705/" target="_blank">Profitable residential cleaning company with recurring revenue</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>7</td>
-      <td><span class="score mid">34</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num">$155,898</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Houston, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/recurring-property-maintenance-business/2485180/" target="_blank">Recurring Property Maintenance Business</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>8</td>
-      <td><span class="score mid">34</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Arlington, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/enviro-master-franchise-ft-worth-recurring-b2b-service-business/2481481/" target="_blank">Enviro-Master Franchise Ft Worth– Recurring B2B Service Business</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>9</td>
-      <td><span class="score mid">34</span></td>
-      <td>texas</td><td>cleaning</td>
-      <td class="num">$3,800,000</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Fort Worth, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/29-yr-old-comm-cleaning-multi-yr-gov-contracts-16m-gross-3-8-ebitda/2407223/" target="_blank">29-Yr Old Comm Cleaning/Multi-Yr Gov Contracts/16M GROSS/3.8 EBITDA!!!</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>10</td>
-      <td><span class="score mid">31</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Durant, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/profitable-print-sign-and-marketing-center-owner-operator-franchise/2435559/" target="_blank">Profitable Print,Sign & Marketing Center/Owner Operator Franchise</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>11</td>
-      <td><span class="score mid">30</span></td>
-      <td>texas</td><td>hvac</td>
-      <td class="num">$590,000</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Arlington, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/" target="_blank">Rapidly Growing HVAC Company in North Texas | Turnkey Operations</a></td>
-      <td><span class="pill warn">license-risk</span><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>12</td>
-      <td><span class="score mid">30</span></td>
-      <td>texas</td><td>hvac</td>
-      <td class="num">$245,519</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Tarrant County, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/" target="_blank">Profitable HVAC Business with Strong Brand | Semi-Absentee Owner</a></td>
-      <td><span class="pill warn">license-risk</span><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>13</td>
-      <td><span class="score mid">30</span></td>
-      <td>texas</td><td>pest-control</td>
-      <td class="num">$254,562</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Tarrant County, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/" target="_blank">Profitable Pest Control Business: Turnkey & Recession Proof</a></td>
-      <td><span class="pill warn">license-risk</span><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>14</td>
-      <td><span class="score mid">28</span></td>
-      <td>texas</td><td>pest-control</td>
-      <td class="num">$97,616</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Fort Worth, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/stable-route-based-business-with-long-term-clients/2452631/" target="_blank">Stable Route-Based Business with Long-Term Clients</a></td>
-      <td><span class="pill warn">license-risk</span><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>15</td>
-      <td><span class="score mid">28</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$244,262</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td></td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/top-roofing-company-general-contractor/2391789/" target="_blank">Top Roofing Company-General Contractor</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>16</td>
-      <td><span class="score mid">28</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$75,000</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Tulsa, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/established-tulsa-metro-cleaning-business-high-recurring-revenue/2469127/" target="_blank">Established Tulsa Metro Cleaning Business | High Recurring Revenue</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>17</td>
-      <td><span class="score mid">28</span></td>
-      <td>arkansas</td><td>service</td>
-      <td class="num">$200,000</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Sebastian County, AR</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/45-year-two-way-radio-sales-and-service-business-w-recurring-revenue/2488772/" target="_blank">45-Year Two-Way Radio Sales & Service Business w/ Recurring Revenue</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>18</td>
-      <td><span class="score mid">28</span></td>
-      <td>arkansas</td><td>service</td>
-      <td class="num">$52,000</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Washington County, AR</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-8-10-hrs-week-156k-contracted-annual-revenue/2489667/" target="_blank">Commercial Cleaning | 8-10 Hrs/Week | $156K Contracted Annual Revenue</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>19</td>
-      <td><span class="score mid">27</span></td>
-      <td>texas</td><td>pest-control</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Houston, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/established-organic-lawn-care-and-pest-control-recurring-revenue/2418469/" target="_blank">Established Organic Lawn Care & Pest Control – Recurring Revenue</a></td>
-      <td><span class="pill warn">license-risk</span><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>20</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$74,082</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td> Bartlesville, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/campbells-snacks-route-bartlesville-ok/2471053/" target="_blank">Campbell’s Snacks Route, Bartlesville, OK</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>21</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$830,243</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Tulsa County, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/30-fedex-p-and-d-routes-for-sale-in-tulsa-oklahoma-area/2462331/" target="_blank">30 FedEx P & D Routes for Sale in Tulsa Oklahoma Area</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>22</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$73,684</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td> Stillwater, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455544/" target="_blank">Flowers Bread Route, Stillwater, OK</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>23</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$68,952</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td> Stillwater, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455537/" target="_blank">Flowers Bread Route, Stillwater, OK</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>24</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num">$98,221</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Jenks, OK</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/mission-foods-route-for-sale-tulsa-ok-110-000/2443990/" target="_blank">Mission Foods Route For Sale-Tulsa OK-$110,000</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>25</td>
-      <td><span class="score mid">27</span></td>
-      <td>oklahoma</td><td>service</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td></td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/1-bread-route-northeastern-oklahoma/2375915/" target="_blank">1 Bread Route - Northeastern Oklahoma</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>26</td>
-      <td><span class="score mid">27</span></td>
-      <td>texas</td><td>service</td>
-      <td class="num">$101,418</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Dallas, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/great-dfw-area-pool-route/2495004/" target="_blank">Great DFW area pool route</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>27</td>
-      <td><span class="score mid">27</span></td>
-      <td>texas</td><td>service</td>
-      <td class="num">$72,162</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Houston, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/great-houston-area-pool-route/2494574/" target="_blank">Great Houston area pool route</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>28</td>
-      <td><span class="score mid">27</span></td>
-      <td>texas</td><td>service</td>
-      <td class="num">$70,942</td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Dallas, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/great-dallas-area-pool-route/2494564/" target="_blank">Great Dallas area pool route</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>29</td>
-      <td><span class="score mid">27</span></td>
-      <td>texas</td><td>service</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td>Flower Mound, TX</td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/established-pool-service-route-flower-mound-with-46-accounts/2484522/" target="_blank">Established Pool Service Route – Flower Mound with 46 Accounts</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
-<tr>
-      <td>30</td>
-      <td><span class="score mid">27</span></td>
-      <td>arkansas</td><td>service</td>
-      <td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td><td class="num"><span class="muted">—</span></td>
-      <td></td>
-      <td><a href="https://www.bizbuysell.com/business-opportunity/1-bread-route-central-arkansas/2472918/" target="_blank">1 Bread Route - Central Arkansas</a></td>
-      <td><span class="pill warn">no-asking-price</span><span class="pill warn">no-sde</span><span class="pill warn">no-revenue</span></td>
-    </tr>
+<tr data-score="84" data-state="kansas" data-industry="cleaning" data-memo="1">
+    <td class="rank">1</td>
+    <td><span class="score hi">84</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">kansas</span></td>
+    <td class="num">$300,615</td>
+    <td class="num">$740,000</td>
+    <td class="num">2.46x</td>
+    <td class="num">33%</td>
+    <td>Sedgwick County, KS</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-turnkey-fully-staffed-300k-income/2481252/" target="_blank" rel="noopener">Commercial Cleaning – Turnkey, Fully Staffed - $300K Income</a></td>
+    <td><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="78" data-state="massachusetts" data-industry="cleaning" data-memo="1">
+    <td class="rank">2</td>
+    <td><span class="score hi">78</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">massachusetts</span></td>
+    <td class="num">$326,402</td>
+    <td class="num">$895,000</td>
+    <td class="num">2.74x</td>
+    <td class="num">45%</td>
+    <td>Middlesex County, MA</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/sba-high-margin-cleaning-business-718k-revenue-287-963k-sde/2489131/" target="_blank" rel="noopener">SBA High-Margin Cleaning Business $718.2K Rev | $326K SDE</a></td>
+    <td><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="76" data-state="texas" data-industry="pest-control" data-memo="1">
+    <td class="rank">3</td>
+    <td><span class="score hi">76</span></td>
+    <td><span class="ind-pill" style="background:#dc262615;color:#dc2626;border-color:#dc262640">pest-control</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$254,562</td>
+    <td class="num">$800,000</td>
+    <td class="num">3.14x</td>
+    <td class="num">45%</td>
+    <td>Tarrant County, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/" target="_blank" rel="noopener">Profitable Pest Control Business: Turnkey & Recession Proof</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill ok">memo-verified</span></td>
+  </tr>
+<tr data-score="74" data-state="oklahoma" data-industry="hvac" data-memo="1">
+    <td class="rank">4</td>
+    <td><span class="score hi">74</span></td>
+    <td><span class="ind-pill" style="background:#d9770615;color:#d97706;border-color:#d9770640">hvac</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$220,357</td>
+    <td class="num">$550,000</td>
+    <td class="num">2.50x</td>
+    <td class="num">38%</td>
+    <td>Oklahoma City, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/residential-hvac-serving-oklahoma-city/2455476/" target="_blank" rel="noopener">Residential HVAC Serving Oklahoma City</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="71" data-state="california" data-industry="cleaning" data-memo="1">
+    <td class="rank">5</td>
+    <td><span class="score hi">71</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">california</span></td>
+    <td class="num">$190,000</td>
+    <td class="num">$700,000</td>
+    <td class="num">3.68x</td>
+    <td class="num">27%</td>
+    <td>Orange County, CA</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/30-year-janitorial-company-90-recurring-revenue-absentee-ready/2491534/" target="_blank" rel="noopener">30-Year Janitorial Company | 90%+ Recurring Revenue | Absentee-Ready</a></td>
+    <td><span class="pill warn">over-multiple</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="60" data-state="new-york" data-industry="landscaping" data-memo="1">
+    <td class="rank">6</td>
+    <td><span class="score hi">60</span></td>
+    <td><span class="ind-pill" style="background:#16a34a15;color:#16a34a;border-color:#16a34a40">landscaping</span></td>
+    <td><span class="state">new-york</span></td>
+    <td class="num">$135,000</td>
+    <td class="num">$99,000</td>
+    <td class="num">0.73x</td>
+    <td class="num">68%</td>
+    <td>Erie County, NY</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/highly-recurring-landscaping-biz-200k-rev-135k-sde-40k-down/2495059/" target="_blank" rel="noopener">Highly Recurring Landscaping Biz | $200K Rev | $135K+ SDE | $40K Down</a></td>
+    <td><span class="pill warn">owner-as-face</span><span class="pill warn">inflated-sde</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="56" data-state="virginia" data-industry="electrical" data-memo="1">
+    <td class="rank">7</td>
+    <td><span class="score mid-hi">56</span></td>
+    <td><span class="ind-pill" style="background:#ca8a0415;color:#ca8a04;border-color:#ca8a0440">electrical</span></td>
+    <td><span class="state">virginia</span></td>
+    <td class="num">$250,000</td>
+    <td class="num">$500,000</td>
+    <td class="num">2.00x</td>
+    <td class="num">42%</td>
+    <td>Richmond, VA</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/respected-multi-decade-electrical-contracting-company/2176524/" target="_blank" rel="noopener">Respected, Multi Decade Electrical Contracting Company</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="56" data-state="ohio" data-industry="plumbing" data-memo="1">
+    <td class="rank">8</td>
+    <td><span class="score mid-hi">56</span></td>
+    <td><span class="ind-pill" style="background:#2563eb15;color:#2563eb;border-color:#2563eb40">plumbing</span></td>
+    <td><span class="state">ohio</span></td>
+    <td class="num">$145,000</td>
+    <td class="num">$375,000</td>
+    <td class="num">2.59x</td>
+    <td class="num">69%</td>
+    <td>Summit County, OH</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/successful-northern-summit-county-plumbing-company/2476477/" target="_blank" rel="noopener">Successful Northern Summit County Plumbing Company</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill warn">owner-as-face</span><span class="pill warn">inflated-sde</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="44" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">9</td>
+    <td><span class="score mid-hi">44</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Lubbock, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/" target="_blank" rel="noopener">Turnkey Aircraft Detailing Business – Recurring Contracts</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="37" data-state="texas" data-industry="service" data-memo="0">
+    <td class="rank">10</td>
+    <td><span class="score mid-hi">37</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$103,549</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Corpus Christi, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/" target="_blank" rel="noopener">Great Corpus Christi turnkey pool route</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="37" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">11</td>
+    <td><span class="score mid-hi">37</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$294,948</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Dallas, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/high-vol-and-absentee-dry-cleaners-w-property-in-dallas-uptown/2289440/" target="_blank" rel="noopener">High Vol & Absentee Dry Cleaners /w Property in Dallas Uptown</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="37" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">12</td>
+    <td><span class="score mid-hi">37</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$370,611</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Fort Worth, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/" target="_blank" rel="noopener">Profitable Pressure Washing Business: Turnkey</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="36" data-state="florida" data-industry="pest-control" data-memo="1">
+    <td class="rank">13</td>
+    <td><span class="score mid-hi">36</span></td>
+    <td><span class="ind-pill" style="background:#dc262615;color:#dc2626;border-color:#dc262640">pest-control</span></td>
+    <td><span class="state">florida</span></td>
+    <td class="num">$84,182</td>
+    <td class="num">$275,000</td>
+    <td class="num">3.27x</td>
+    <td class="num">27%</td>
+    <td>Hillsborough County, FL</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-pest-control-store-absentee-operated/2485638/" target="_blank" rel="noopener">Profitable Pest Control Store – Absentee Operated</a></td>
+    <td><span class="pill warn">retail-not-route</span><span class="pill ok">memo-sourced</span></td>
+  </tr>
+<tr data-score="35" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">14</td>
+    <td><span class="score mid-hi">35</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Fort Worth, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/swimming-pool-cleaning-and-repair-route/2369806/" target="_blank" rel="noopener">Swimming Pool Cleaning and Repair Route</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="34" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">15</td>
+    <td><span class="score mid">34</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Southlake, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-residential-cleaning-company-with-recurring-revenue/2494705/" target="_blank" rel="noopener">Profitable residential cleaning company with recurring revenue</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="34" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">16</td>
+    <td><span class="score mid">34</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$155,898</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Houston, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/recurring-property-maintenance-business/2485180/" target="_blank" rel="noopener">Recurring Property Maintenance Business</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="34" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">17</td>
+    <td><span class="score mid">34</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Arlington, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/enviro-master-franchise-ft-worth-recurring-b2b-service-business/2481481/" target="_blank" rel="noopener">Enviro-Master Franchise Ft Worth– Recurring B2B Service Business</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="34" data-state="texas" data-industry="cleaning" data-memo="0">
+    <td class="rank">18</td>
+    <td><span class="score mid">34</span></td>
+    <td><span class="ind-pill" style="background:#05966915;color:#059669;border-color:#05966940">cleaning</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$3,800,000</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Fort Worth, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/29-yr-old-comm-cleaning-multi-yr-gov-contracts-16m-gross-3-8-ebitda/2407223/" target="_blank" rel="noopener">29-Yr Old Comm Cleaning/Multi-Yr Gov Contracts/16M GROSS/3.8 EBITDA!!!</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="31" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">19</td>
+    <td><span class="score mid">31</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Durant, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-print-sign-and-marketing-center-owner-operator-franchise/2435559/" target="_blank" rel="noopener">Profitable Print,Sign & Marketing Center/Owner Operator Franchise</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="30" data-state="texas" data-industry="hvac" data-memo="0">
+    <td class="rank">20</td>
+    <td><span class="score mid">30</span></td>
+    <td><span class="ind-pill" style="background:#d9770615;color:#d97706;border-color:#d9770640">hvac</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$590,000</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Arlington, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/" target="_blank" rel="noopener">Rapidly Growing HVAC Company in North Texas | Turnkey Operations</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="30" data-state="texas" data-industry="hvac" data-memo="0">
+    <td class="rank">21</td>
+    <td><span class="score mid">30</span></td>
+    <td><span class="ind-pill" style="background:#d9770615;color:#d97706;border-color:#d9770640">hvac</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$245,519</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Tarrant County, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/" target="_blank" rel="noopener">Profitable HVAC Business with Strong Brand | Semi-Absentee Owner</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="28" data-state="texas" data-industry="pest-control" data-memo="0">
+    <td class="rank">22</td>
+    <td><span class="score mid">28</span></td>
+    <td><span class="ind-pill" style="background:#dc262615;color:#dc2626;border-color:#dc262640">pest-control</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num">$97,616</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Fort Worth, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/stable-route-based-business-with-long-term-clients/2452631/" target="_blank" rel="noopener">Stable Route-Based Business with Long-Term Clients</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="28" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">23</td>
+    <td><span class="score mid">28</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$244,262</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td><span class="muted">—</span></td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/top-roofing-company-general-contractor/2391789/" target="_blank" rel="noopener">Top Roofing Company-General Contractor</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="28" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">24</td>
+    <td><span class="score mid">28</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$75,000</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Tulsa, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-tulsa-metro-cleaning-business-high-recurring-revenue/2469127/" target="_blank" rel="noopener">Established Tulsa Metro Cleaning Business | High Recurring Revenue</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="28" data-state="arkansas" data-industry="service" data-memo="0">
+    <td class="rank">25</td>
+    <td><span class="score mid">28</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">arkansas</span></td>
+    <td class="num">$200,000</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Sebastian County, AR</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/45-year-two-way-radio-sales-and-service-business-w-recurring-revenue/2488772/" target="_blank" rel="noopener">45-Year Two-Way Radio Sales & Service Business w/ Recurring Revenue</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="28" data-state="arkansas" data-industry="service" data-memo="0">
+    <td class="rank">26</td>
+    <td><span class="score mid">28</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">arkansas</span></td>
+    <td class="num">$52,000</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Washington County, AR</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-8-10-hrs-week-156k-contracted-annual-revenue/2489667/" target="_blank" rel="noopener">Commercial Cleaning | 8-10 Hrs/Week | $156K Contracted Annual Revenue</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="27" data-state="texas" data-industry="pest-control" data-memo="0">
+    <td class="rank">27</td>
+    <td><span class="score mid">27</span></td>
+    <td><span class="ind-pill" style="background:#dc262615;color:#dc2626;border-color:#dc262640">pest-control</span></td>
+    <td><span class="state">texas</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Houston, TX</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-organic-lawn-care-and-pest-control-recurring-revenue/2418469/" target="_blank" rel="noopener">Established Organic Lawn Care & Pest Control – Recurring Revenue</a></td>
+    <td><span class="pill red">license-risk</span><span class="pill muted">no-asking-price</span><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="27" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">28</td>
+    <td><span class="score mid">27</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$74,082</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Bartlesville, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/campbells-snacks-route-bartlesville-ok/2471053/" target="_blank" rel="noopener">Campbell’s Snacks Route, Bartlesville, OK</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="27" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">29</td>
+    <td><span class="score mid">27</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$830,243</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Tulsa County, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/30-fedex-p-and-d-routes-for-sale-in-tulsa-oklahoma-area/2462331/" target="_blank" rel="noopener">30 FedEx P & D Routes for Sale in Tulsa Oklahoma Area</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
+<tr data-score="27" data-state="oklahoma" data-industry="service" data-memo="0">
+    <td class="rank">30</td>
+    <td><span class="score mid">27</span></td>
+    <td><span class="ind-pill" style="background:#64748b15;color:#64748b;border-color:#64748b40">service</span></td>
+    <td><span class="state">oklahoma</span></td>
+    <td class="num">$73,684</td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td class="num"><span class="muted">—</span></td>
+    <td>Stillwater, OK</td>
+    <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455544/" target="_blank" rel="noopener">Flowers Bread Route, Stillwater, OK</a></td>
+    <td><span class="pill muted">no-asking-price</span><span class="pill muted">no-revenue</span></td>
+  </tr>
 </tbody></table>
+</div>
+
+<h2>Breakdowns</h2>
+<div class="charts">
+  <div class="chart-card"><h3>Score distribution</h3><canvas id="histChart"></canvas></div>
+  <div class="chart-card"><h3>By state</h3><canvas id="stateChart"></canvas></div>
+  <div class="chart-card"><h3>By industry</h3><canvas id="indChart"></canvas></div>
+</div>
+
+<details class="methodology">
+  <summary>Rubric v2 — how scores are calculated</summary>
+  <ul>
+    <li><b>Scheduling / route density (20)</b> — routes, territories, dispatch, maintenance agreements.</li>
+    <li><b>Owner workload AI can replace (18)</b> — owner handles CSR/quoting/scheduling/estimates.</li>
+    <li><b>Recurring / contract revenue (15)</b> — explicit recurring %, contracts, memberships.</li>
+    <li><b>Size fit (10)</b> — SDE $100K–$400K, ask $150K–$1.5M, ≤15 employees.</li>
+    <li><b>Price sanity vs regional multiple (8)</b> — OK ≤3.0x, DFW ≤2.85x.</li>
+    <li><b>Margin headroom vs industry benchmark (12)</b> — pest 34%, cleaning 30%, HVAC 22%, etc.</li>
+    <li><b>Absentee / manager-ready (10)</b> — owner-light, 1099 labor, home-based.</li>
+    <li><b>License transferability (7)</b> — penalizes OK/TX regulated trades without qualifier path.</li>
+    <li><b>Soft red flags (−5 each)</b> — customer concentration, tech-dependent, owner-as-face, inflated SDE.</li>
+    <li><b>Hard DQ</b> — franchise, restaurant/medical/legal, ask &gt;$3M, SDE &lt;$50K.</li>
+  </ul>
+</details>
+
+</div>
 
 <script>
+  // Chart.js
+  const chartBase = {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } },
+    maintainAspectRatio: false,
+  };
   new Chart(document.getElementById('histChart'), {
     type: 'bar',
-    data: { labels: ["10-14","20-24","25-29","30-34","35-39","40-44"], datasets: [{ label: 'listings', data: [84,22,41,8,4,1], backgroundColor: '#4a7fd1' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    data: { labels: ["0-4","10-14","20-24","25-29","30-34","35-39","40-44","55-59","60-64","70-74","75-79","80-84"], datasets: [{ label: 'listings', data: [1,84,22,41,7,5,1,2,1,2,2,1], backgroundColor: '#4a7fd1', borderRadius: 3 }] },
+    options: chartBase,
   });
   new Chart(document.getElementById('stateChart'), {
     type: 'bar',
-    data: { labels: ["texas","oklahoma","arkansas"], datasets: [{ label: 'listings', data: [94,49,17], backgroundColor: '#6bb26b' }] },
-    options: { plugins: { title: { display: true, text: 'Listings by state' } }, scales: { y: { beginAtZero: true } } }
+    data: { labels: ["arkansas","california","florida","kansas","massachusetts","new-york","ohio","oklahoma","texas","virginia"], datasets: [{ label: 'listings', data: [1,1,95,50,1,1,1,1,1,17], backgroundColor: '#16a34a', borderRadius: 3 }] },
+    options: chartBase,
   });
   new Chart(document.getElementById('indChart'), {
     type: 'bar',
-    data: { labels: ["cleaning","service","hvac","pest-control","building-and-construction","plumbing"],
+    data: {
+      labels: ["building-and-construction","cleaning","electrical","hvac","landscaping","pest-control","plumbing","service"],
       datasets: [
-        { label: 'count', data: [22,78,16,3,38,3], backgroundColor: '#6bb26b', yAxisID: 'y' },
-        { label: 'avg score', data: [30.3,17.7,21.3,28.3,14,12], backgroundColor: '#d18a4a', yAxisID: 'y1' }
+        { label: 'count', data: [25,4,18,1,1,4,78,38], backgroundColor: '#16a34a', yAxisID: 'y', borderRadius: 3 },
+        { label: 'avg score', data: [36,41.8,23,60,56,23,17.7,14], backgroundColor: '#d97706', yAxisID: 'y1', borderRadius: 3 },
       ]
     },
     options: {
-      plugins: { title: { display: true, text: 'Industry mix & avg score' } },
-      scales: { y: { beginAtZero: true, position: 'left' }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false } } }
+      plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } },
+      scales: {
+        y: { beginAtZero: true, position: 'left', grid: { color: '#f1f5f9' }, ticks: { font: { size: 11 } } },
+        y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      },
+      maintainAspectRatio: false,
     }
   });
 
-  // click-to-sort
-  document.querySelectorAll('#topTable th').forEach((th, i) => {
-    let asc = true;
+  // Filtering
+  const table = document.getElementById('topTable');
+  const tbody = table.querySelector('tbody');
+  const allRows = Array.from(tbody.querySelectorAll('tr'));
+  const $search = document.getElementById('searchInput');
+  const $state = document.getElementById('stateFilter');
+  const $ind = document.getElementById('industryFilter');
+  const $memo = document.getElementById('memoOnly');
+  const $count = document.getElementById('countLive');
+  const TOTAL = 169;
+
+  function applyFilter() {
+    const q = $search.value.toLowerCase().trim();
+    const st = $state.value;
+    const ind = $ind.value;
+    const memo = $memo.checked;
+    let shown = 0;
+    for (const tr of allRows) {
+      const text = tr.innerText.toLowerCase();
+      let ok = true;
+      if (q && !text.includes(q)) ok = false;
+      if (st && tr.dataset.state !== st) ok = false;
+      if (ind && tr.dataset.industry !== ind) ok = false;
+      if (memo && tr.dataset.memo !== '1') ok = false;
+      tr.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    }
+    $count.textContent = 'showing ' + shown + ' of ' + TOTAL;
+  }
+  [$search, $state, $ind, $memo].forEach((el) => el.addEventListener('input', applyFilter));
+
+  // Sort
+  const ths = table.querySelectorAll('th[data-sort]');
+  ths.forEach((th) => {
+    let asc = false;
     th.addEventListener('click', () => {
-      const tb = document.querySelector('#topTable tbody');
-      const trs = Array.from(tb.querySelectorAll('tr'));
+      ths.forEach((x) => x.classList.remove('sorted', 'asc'));
+      th.classList.add('sorted');
+      if (asc) th.classList.add('asc');
+      const idx = Array.from(th.parentElement.children).indexOf(th);
+      const trs = Array.from(tbody.querySelectorAll('tr'));
       trs.sort((a, b) => {
-        const av = a.children[i].innerText;
-        const bv = b.children[i].innerText;
+        const av = a.children[idx].innerText;
+        const bv = b.children[idx].innerText;
         const an = parseFloat(av.replace(/[^-\d.]/g, ''));
         const bn = parseFloat(bv.replace(/[^-\d.]/g, ''));
         if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
         return asc ? av.localeCompare(bv) : bv.localeCompare(av);
       });
       asc = !asc;
-      trs.forEach((tr) => tb.appendChild(tr));
+      trs.forEach((tr) => tbody.appendChild(tr));
+      // renumber
+      tbody.querySelectorAll('tr').forEach((tr, i) => { tr.children[0].textContent = String(i + 1); });
     });
   });
 </script>

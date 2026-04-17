@@ -9,6 +9,12 @@ node_modules/
 
 # Local scraper session (contains real Chrome cookies/session)
 .browser-profile/
+.google-profile/
+.ddg-profile/
+
+# Intermediate files
+data/memo-url-map-8of9.json
+data/report-preview.png
 
 # Logs
 *.log
