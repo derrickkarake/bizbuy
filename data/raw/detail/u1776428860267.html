@@ -1,0 +1,11 @@
+<html><head><title>BizBuy collector</title>
+<style>body{font:14px/1.5 -apple-system,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem}
+code{background:#f4f4f4;padding:2px 6px;border-radius:3px}pre{background:#f4f4f4;padding:1rem;overflow:auto}</style></head><body>
+<h1>Collector running</h1>
+<p>Collected: <b>0</b></p>
+<h3>Recent</h3>
+<ul></ul>
+<h3>Bookmarklet</h3>
+<p>Drag this to your bookmarks bar:</p>
+<p><a href="javascript:(function(){fetch('http://localhost:4455/collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:location.href,html:document.documentElement.outerHTML})}).then(r=&gt;r.json()).then(d=&gt;{const n=document.createElement('div');n.textContent='✓ collected '+(d.id||'');n.style.cssText='position:fixed;top:10px;right:10px;background:#2a7;color:#fff;padding:10px 14px;border-radius:6px;z-index:99999;font:14px sans-serif';document.body.appendChild(n);setTimeout(()=&gt;n.remove(),2500)}).catch(e=&gt;alert('collect failed: '+e.message))})();" style="display:inline-block;padding:8px 14px;background:#1746a2;color:#fff;border-radius:6px;text-decoration:none">📎 BizBuy collect</a></p>
+</body></html>

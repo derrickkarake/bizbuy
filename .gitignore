@@ -8,7 +8,7 @@ node_modules/
 /playwright/.auth/
 
 # Local scraper session (contains real Chrome cookies/session)
-.browser-profile/
+.browser-profile*/
 .google-profile/
 .ddg-profile/
 

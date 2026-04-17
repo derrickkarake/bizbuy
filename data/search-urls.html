@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><title>BizBuy search URLs to collect</title>
+<style>
+body{font:14px/1.5 -apple-system,sans-serif;max-width:960px;margin:1.5rem auto;padding:0 1rem;color:#222}
+h1{font-size:1.3rem}h2{margin-top:1.5rem;font-size:1.05rem;color:#333}
+.step{background:#fffae6;padding:.8rem 1rem;border-left:3px solid #d4a017;border-radius:4px;margin:1rem 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem .75rem}
+.grid a{display:block;padding:.5rem .6rem;background:#fafafa;border:1px solid #eee;border-radius:4px;text-decoration:none;color:#1746a2;font-size:13px}
+.grid a:hover{background:#f0f4ff;border-color:#b0c4ff}
+.state{margin-bottom:1rem}
+.state h2{margin-bottom:.4rem}
+.hint{color:#666;font-size:12px;margin-top:.3rem}
+</style></head><body>
+
+<h1>Search-page collection</h1>
+
+<div class="step">
+<b>Flow</b>: open each link below in your incognito Chrome. Scroll to load all listings if needed. Click the <b>📎 BizBuy collect</b> bookmarklet. The server parses every listing card on the page and merges them into <code>data/cards-collected.json</code>. Duplicates are skipped automatically. Status at <a href="http://localhost:4455/" target="_blank">localhost:4455</a>.
+</div>
+
+<div class="state">
+<h2>Oklahoma</h2>
+<div class="grid">
+<a href="https://www.bizbuysell.com/oklahoma/service-businesses-for-sale/" target="_blank">service</a>
+<a href="https://www.bizbuysell.com/oklahoma/plumbing-businesses-for-sale/" target="_blank">plumbing</a>
+<a href="https://www.bizbuysell.com/oklahoma/hvac-businesses-for-sale/" target="_blank">hvac</a>
+<a href="https://www.bizbuysell.com/oklahoma/pest-control-businesses-for-sale/" target="_blank">pest-control</a>
+<a href="https://www.bizbuysell.com/oklahoma/cleaning-businesses-for-sale/" target="_blank">cleaning</a>
+<a href="https://www.bizbuysell.com/oklahoma/building-and-construction-businesses-for-sale/" target="_blank">building-and-construction</a>
+</div>
+</div>
+
+<div class="state">
+<h2>Texas</h2>
+<div class="grid">
+<a href="https://www.bizbuysell.com/texas/service-businesses-for-sale/" target="_blank">service</a>
+<a href="https://www.bizbuysell.com/texas/plumbing-businesses-for-sale/" target="_blank">plumbing</a>
+<a href="https://www.bizbuysell.com/texas/hvac-businesses-for-sale/" target="_blank">hvac</a>
+<a href="https://www.bizbuysell.com/texas/pest-control-businesses-for-sale/" target="_blank">pest-control</a>
+<a href="https://www.bizbuysell.com/texas/cleaning-businesses-for-sale/" target="_blank">cleaning</a>
+<a href="https://www.bizbuysell.com/texas/building-and-construction-businesses-for-sale/" target="_blank">building-and-construction</a>
+</div>
+</div>
+
+<div class="state">
+<h2>Arkansas</h2>
+<div class="grid">
+<a href="https://www.bizbuysell.com/arkansas/service-businesses-for-sale/" target="_blank">service</a>
+<a href="https://www.bizbuysell.com/arkansas/plumbing-businesses-for-sale/" target="_blank">plumbing</a>
+<a href="https://www.bizbuysell.com/arkansas/hvac-businesses-for-sale/" target="_blank">hvac</a>
+<a href="https://www.bizbuysell.com/arkansas/pest-control-businesses-for-sale/" target="_blank">pest-control</a>
+<a href="https://www.bizbuysell.com/arkansas/cleaning-businesses-for-sale/" target="_blank">cleaning</a>
+<a href="https://www.bizbuysell.com/arkansas/building-and-construction-businesses-for-sale/" target="_blank">building-and-construction</a>
+</div>
+</div>
+
+<div class="state">
+<h2>Bonus — national pools (pick the ones that match your thesis)</h2>
+<div class="grid">
+<a href="https://www.bizbuysell.com/service-businesses-for-sale/" target="_blank">service (all)</a>
+<a href="https://www.bizbuysell.com/hvac-businesses-for-sale/" target="_blank">hvac (all)</a>
+<a href="https://www.bizbuysell.com/pest-control-businesses-for-sale/" target="_blank">pest-control (all)</a>
+<a href="https://www.bizbuysell.com/cleaning-businesses-for-sale/" target="_blank">cleaning (all)</a>
+<a href="https://www.bizbuysell.com/plumbing-businesses-for-sale/" target="_blank">plumbing (all)</a>
+<a href="https://www.bizbuysell.com/building-and-construction-businesses-for-sale/" target="_blank">building-and-construction (all)</a>
+</div>
+</div>
+
+<p class="hint">Tip: scroll to the bottom of each search page before clicking the bookmarklet so any lazy-loaded cards are in the DOM.</p>
+
+</body></html>

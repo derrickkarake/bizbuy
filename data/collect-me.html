@@ -1,0 +1,63 @@
+<!doctype html><html><head><meta charset="utf-8"><title>BizBuy collect list</title>
+<style>
+body{font:14px/1.5 -apple-system,sans-serif;max-width:900px;margin:1.5rem auto;padding:0 1rem;color:#222}
+h1{font-size:1.3rem}
+.step{background:#f4f4f4;padding:1rem;border-radius:8px;margin:1rem 0}
+code{background:#fff;padding:2px 6px;border-radius:3px;font-size:12px}
+ol.urls li{margin:.4rem 0;padding:.4rem .6rem;background:#fafafa;border:1px solid #eee;border-radius:4px}
+ol.urls a{text-decoration:none;color:#1746a2}
+.bm{display:inline-block;padding:8px 14px;background:#1746a2;color:#fff;border-radius:6px;text-decoration:none;font-weight:600}
+.hint{color:#666;font-size:12px}
+</style></head><body>
+
+<h1>BizBuy collect workflow</h1>
+
+<div class="step">
+<b>Step 1</b> — drag this bookmarklet to your bookmarks bar (show it with <code>Cmd+Shift+B</code> if hidden):
+<p><a class="bm" href="javascript:(function(){fetch('http://localhost:4455/collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:location.href,html:document.documentElement.outerHTML})}).then(r=>r.json()).then(d=>{const n=document.createElement('div');n.textContent='✓ collected '+(d.id||'');n.style.cssText='position:fixed;top:10px;right:10px;background:#2a7;color:#fff;padding:10px 14px;border-radius:6px;z-index:99999;font:14px sans-serif';document.body.appendChild(n);setTimeout(()=>n.remove(),2500)}).catch(e=>alert('collect failed: '+e.message))})();">📎 BizBuy collect</a></p>
+<p class="hint">If bookmarks bar doesn't accept incognito drags, right-click → "Add page to bookmarks" on the bookmarklet while in a regular window — bookmarks sync to incognito.</p>
+</div>
+
+<div class="step">
+<b>Step 2</b> — cmd-click each link below to open in new tabs (in your incognito window). On each opened listing, click the <b>📎 BizBuy collect</b> bookmarklet. You'll see a green ✓ confirmation in the corner.
+</div>
+
+<div class="step">
+<b>Step 3</b> — watch progress at <a href="http://localhost:4455/" target="_blank">http://localhost:4455/</a>. When all 30 are collected, tell me and I'll rescore + update the report.
+</div>
+
+<h2>Top 30 to collect</h2>
+<ol class="urls">
+<li><a href="https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/" target="_blank">Turnkey Aircraft Detailing – Recurring Contracts (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/" target="_blank">Corpus Christi Pool Route (TX / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/high-vol-and-absentee-dry-cleaners-w-property-in-dallas-uptown/2289440/" target="_blank">Dallas Uptown Dry Cleaners – Absentee (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/" target="_blank">Fort Worth Pressure Washing – Turnkey (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/swimming-pool-cleaning-and-repair-route/2369806/" target="_blank">Swimming Pool Cleaning Route (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/profitable-residential-cleaning-company-with-recurring-revenue/2494705/" target="_blank">Profitable Residential Cleaning – Recurring (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/recurring-property-maintenance-business/2485180/" target="_blank">Recurring Property Maintenance (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/enviro-master-franchise-ft-worth-recurring-b2b-service-business/2481481/" target="_blank">Enviro-Master Franchise Fort Worth (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/29-yr-old-comm-cleaning-multi-yr-gov-contracts-16m-gross-3-8-ebitda/2407223/" target="_blank">29-Yr Commercial Cleaning w/ Gov Contracts (TX / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/profitable-print-sign-and-marketing-center-owner-operator-franchise/2435559/" target="_blank">Print/Sign/Marketing Center Durant OK (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/" target="_blank">Rapidly Growing HVAC North Texas – Turnkey (TX / hvac)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/" target="_blank">HVAC Semi-Absentee Tarrant County (TX / hvac)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/" target="_blank">Profitable Pest Control – Turnkey Tarrant County (TX / pest-control)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/stable-route-based-business-with-long-term-clients/2452631/" target="_blank">Route-Based Pest Control Fort Worth (TX / pest-control)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/top-roofing-company-general-contractor/2391789/" target="_blank">Top Roofing Co (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/established-tulsa-metro-cleaning-business-high-recurring-revenue/2469127/" target="_blank">Tulsa Metro Cleaning – Recurring (OK / cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/45-year-two-way-radio-sales-and-service-business-w-recurring-revenue/2488772/" target="_blank">45-Yr Two-Way Radio Service (service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-8-10-hrs-week-156k-contracted-annual-revenue/2489667/" target="_blank">Commercial Cleaning 8-10 hrs/week (cleaning)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/established-organic-lawn-care-and-pest-control-recurring-revenue/2418469/" target="_blank">Organic Lawn Care + Pest Control Houston (TX / pest-control)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/campbells-snacks-route-bartlesville-ok/2471053/" target="_blank">Campbell's Snacks Route Bartlesville (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/30-fedex-p-and-d-routes-for-sale-in-tulsa-oklahoma-area/2462331/" target="_blank">30 FedEx P&D Routes Tulsa (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455544/" target="_blank">Flowers Bread Route Stillwater (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455537/" target="_blank">Flowers Bread Route Stillwater #2 (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/mission-foods-route-for-sale-tulsa-ok-110-000/2443990/" target="_blank">Mission Foods Route Tulsa (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/1-bread-route-northeastern-oklahoma/2375915/" target="_blank">#1 Bread Route NE Oklahoma (OK / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/great-dfw-area-pool-route/2495004/" target="_blank">DFW Pool Route (TX / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/great-houston-area-pool-route/2494574/" target="_blank">Houston Pool Route (TX / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/great-dallas-area-pool-route/2494564/" target="_blank">Dallas Pool Route (TX / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/established-pool-service-route-flower-mound-with-46-accounts/2484522/" target="_blank">Flower Mound Pool Route – 46 accounts (TX / service)</a></li>
+<li><a href="https://www.bizbuysell.com/business-opportunity/1-bread-route-central-arkansas/2472918/" target="_blank">#1 Bread Route Central Arkansas (AR / service)</a></li>
+</ol>
+
+</body></html>
