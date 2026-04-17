@@ -1,0 +1,114 @@
+[
+  {
+    "url": "https://www.bizbuysell.com/businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/businesses-for-sale/",
+    "title": "Businesses For Sale - BizBuySell",
+    "h1": "Businesses For Sale",
+    "approxCards": 67
+  },
+  {
+    "url": "https://www.bizbuysell.com/service-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/service-businesses-for-sale/",
+    "title": "Service Businesses For Sale - BizBuySell",
+    "h1": "Service Businesses For Sale",
+    "approxCards": 66
+  },
+  {
+    "url": "https://www.bizbuysell.com/plumbing-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/plumbing-businesses-for-sale/",
+    "title": "Plumbing Businesses For Sale - BizBuySell",
+    "h1": "Plumbing Businesses For Sale",
+    "approxCards": 66
+  },
+  {
+    "url": "https://www.bizbuysell.com/hvac-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/hvac-businesses-for-sale/",
+    "title": "HVAC Businesses For Sale - BizBuySell",
+    "h1": "HVAC Businesses For Sale",
+    "approxCards": 66
+  },
+  {
+    "url": "https://www.bizbuysell.com/heating-cooling-businesses-for-sale/",
+    "status": 404,
+    "finalUrl": "https://www.bizbuysell.com/heating-cooling-businesses-for-sale/",
+    "title": "BizBuySell - File Not Found",
+    "h1": "The page you requested could not be found.",
+    "approxCards": 0
+  },
+  {
+    "url": "https://www.bizbuysell.com/electrical-businesses-for-sale/",
+    "status": 404,
+    "finalUrl": "https://www.bizbuysell.com/electrical-businesses-for-sale/",
+    "title": "BizBuySell - File Not Found",
+    "h1": "The page you requested could not be found.",
+    "approxCards": 0
+  },
+  {
+    "url": "https://www.bizbuysell.com/landscaping-businesses-for-sale/",
+    "status": 404,
+    "finalUrl": "https://www.bizbuysell.com/landscaping-businesses-for-sale/",
+    "title": "BizBuySell - File Not Found",
+    "h1": "The page you requested could not be found.",
+    "approxCards": 0
+  },
+  {
+    "url": "https://www.bizbuysell.com/pest-control-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/pest-control-businesses-for-sale/",
+    "title": "Pest Control Businesses For Sale - BizBuySell",
+    "h1": "Pest Control Businesses For Sale",
+    "approxCards": 66
+  },
+  {
+    "url": "https://www.bizbuysell.com/cleaning-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/cleaning-businesses-for-sale/",
+    "title": "Cleaning Businesses For Sale - BizBuySell",
+    "h1": "Cleaning Businesses For Sale",
+    "approxCards": 66
+  },
+  {
+    "url": "https://www.bizbuysell.com/building-and-construction-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/building-and-construction-businesses-for-sale/",
+    "title": "Building and Construction Businesses For Sale - BizBuySell",
+    "h1": "Building and Construction Businesses For Sale",
+    "approxCards": 67
+  },
+  {
+    "url": "https://www.bizbuysell.com/texas-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/texas-businesses-for-sale/",
+    "title": "Businesses For Sale in Texas - BizBuySell",
+    "h1": "Businesses For Sale in Texas",
+    "approxCards": 67
+  },
+  {
+    "url": "https://www.bizbuysell.com/florida-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/florida-businesses-for-sale/",
+    "title": "Businesses For Sale in Florida - BizBuySell",
+    "h1": "Businesses For Sale in Florida",
+    "approxCards": 67
+  },
+  {
+    "url": "https://www.bizbuysell.com/texas/plumbing-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/texas/plumbing-businesses-for-sale/",
+    "title": "Plumbing Businesses For Sale in Texas - BizBuySell",
+    "h1": "Plumbing Businesses For Sale in Texas",
+    "approxCards": 34
+  },
+  {
+    "url": "https://www.bizbuysell.com/texas/hvac-businesses-for-sale/",
+    "status": 200,
+    "finalUrl": "https://www.bizbuysell.com/texas/hvac-businesses-for-sale/",
+    "title": "HVAC Businesses For Sale in Texas - BizBuySell",
+    "h1": "HVAC Businesses For Sale in Texas",
+    "approxCards": 49
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "tag": "div",
+    "cls": "listing-element ng-tns-c2753574430-2",
+    "outerHTMLSnippet": "<div _ngcontent-bbs-c2753574430=\"\" id=\"multi-select-industry\" class=\"listing-element ng-tns-c2753574430-2\"><div _ngcontent-bbs-c2753574430=\"\" class=\"listing-industry-autocomplete ng-tns-c2753574430-2\"><!----></div><!----><!----><!----></div>"
+  },
+  {
+    "tag": "div",
+    "cls": "listing-industry-autocomplete ng-tns-c2753574430-2",
+    "outerHTMLSnippet": "<div _ngcontent-bbs-c2753574430=\"\" class=\"listing-industry-autocomplete ng-tns-c2753574430-2\"><!----></div>"
+  },
+  {
+    "tag": "app-bfs-listing-type",
+    "cls": "listing-type hide-on-mobile ng-tns-c626507494-3 ng-star-inserted",
+    "outerHTMLSnippet": "<app-bfs-listing-type _ngcontent-bbs-c3698128777=\"\" class=\"listing-type hide-on-mobile ng-tns-c626507494-3 ng-star-inserted\" _nghost-bbs-c626507494=\"\"><button _ngcontent-bbs-c626507494=\"\" class=\"btn filter-bar listing-types-button listing-type ng-tns-c626507494-3\">Listing Types <i _ngcontent-bbs-c626507494=\"\" class=\"filter-caret ng-tns-c626507494-3\"></i></button><!----></app-bfs-listing-type>"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar listing-types-button listing-type ng-tns-c626507494-3",
+    "outerHTMLSnippet": "<button _ngcontent-bbs-c626507494=\"\" class=\"btn filter-bar listing-types-button listing-type ng-tns-c626507494-3\">Listing Types <i _ngcontent-bbs-c626507494=\"\" class=\"filter-caret ng-tns-c626507494-3\"></i></button>"
+  },
+  {
+    "tag": "div",
+    "cls": "search-result-container",
+    "outerHTMLSnippet": "<div _ngcontent-bbs-c2725663336=\"\" class=\"search-result-container\"><section _ngcontent-bbs-c2725663336=\"\" id=\"search-results\" class=\"ng-col-10 ng-tablet-col-12 ng-mobile-col-12 ng-star-inserted\"><app-seo-data _ngcontent-bbs-c2725663336=\"\" _nghost-bbs-c3303061449=\"\"><div _ngcontent-bbs-c3303061449=\"\" class=\"seo-container ng-star-inserted\"><h1 _ngcontent-bbs-c3303061449=\"\" class=\"header reduced-flex-header ng-star-inserted\">Businesses For Sale</h1><!----><!----><div _ngcontent-bbs-c3303061449=\"\" class=\"info increased-flex-info\"><div _ngcontent-bbs-c3303061449=\"\" class=\"result-count ng-star-inser"
+  }
+]

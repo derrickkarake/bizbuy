@@ -1,0 +1,15 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Local scraper session (contains real Chrome cookies/session)
+.browser-profile/
+
+# Logs
+*.log
+.DS_Store

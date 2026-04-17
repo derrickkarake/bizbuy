@@ -1,0 +1,302 @@
+[
+  {
+    "text": "",
+    "aria": "Expand Side Nav",
+    "cls": "hamburgerArrow link c-pointer gray"
+  },
+  {
+    "text": "Buy a Business",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle"
+  },
+  {
+    "text": "Buy a Franchise",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle buyFranchiseDD"
+  },
+  {
+    "text": "Sell a Business",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle sellBusinessDD"
+  },
+  {
+    "text": "Tools & Advice",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle toolsDD"
+  },
+  {
+    "text": "Business Brokers",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle brokerdd"
+  },
+  {
+    "text": "My BizBuySell",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle"
+  },
+  {
+    "text": "Sign Out",
+    "aria": null,
+    "cls": "dropdown-item"
+  },
+  {
+    "text": "Sign Out",
+    "aria": null,
+    "cls": "dropdown-item"
+  },
+  {
+    "text": "My BizBuySell",
+    "aria": null,
+    "cls": "nav-link dropdown-toggle"
+  },
+  {
+    "text": "Sign Out",
+    "aria": null,
+    "cls": "dropdown-item"
+  },
+  {
+    "text": "Buy a Business",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Buy a Franchise",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Sell a Business",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Tools & Advice",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Business Brokers",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "My BizBuySell",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "My Business",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Selling",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Searching",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Research",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Guide to Buying",
+    "aria": null,
+    "cls": ""
+  },
+  {
+    "text": "Message Center",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Account",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "My BizBuySell",
+    "aria": null,
+    "cls": "accordion-button collapsed"
+  },
+  {
+    "text": "Sign Out",
+    "aria": null,
+    "cls": "accordion-link sign-out"
+  },
+  {
+    "text": "Industries",
+    "aria": null,
+    "cls": "btn filter-bar industry-btn hide-on-mobile"
+  },
+  {
+    "text": "Listing Types",
+    "aria": null,
+    "cls": "btn filter-bar listing-types-button listing-type ng-tns-c626507494-3"
+  },
+  {
+    "text": "Price Range",
+    "aria": null,
+    "cls": "btn filter-bar priceRange ng-tns-c48693050-4"
+  },
+  {
+    "text": "More Filters",
+    "aria": null,
+    "cls": "btn filter-bar more-filter-button hide-on-mobile"
+  },
+  {
+    "text": "Filters",
+    "aria": null,
+    "cls": "btn filter-bar more-filter-button hide-desktop"
+  },
+  {
+    "text": "Clear",
+    "aria": null,
+    "cls": "btn filter-bar hide-on-mobile clear-filter"
+  },
+  {
+    "text": "Save Search",
+    "aria": null,
+    "cls": "btn filter-bar save save-search hide-on-mobile hide-on-tablet ng-tns-c4219813880"
+  },
+  {
+    "text": "Save",
+    "aria": null,
+    "cls": "btn filter-bar save save-search hide-on-desktop hide-on-mobile ng-tns-c421981388"
+  },
+  {
+    "text": "Sort",
+    "aria": null,
+    "cls": "f-14 secondary-blue light btn mobile-sort show-sort-button dropdown-toggle hide-"
+  },
+  {
+    "text": "featured",
+    "aria": null,
+    "cls": "btn f-14 show-desktop-sort dropdown-toggle no-arrow hide-on-mobile secondary-blu"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  },
+  {
+    "text": "Contact",
+    "aria": null,
+    "cls": "btn diamond-contact contactSeller ng-star-inserted"
+  }
+]

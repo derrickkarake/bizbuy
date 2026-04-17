@@ -1,0 +1,114 @@
+[
+  {
+    "tag": "section",
+    "cls": "filter-bar-sticky",
+    "id": "",
+    "aria": null,
+    "childCount": 1,
+    "textSnippet": ""
+  },
+  {
+    "tag": "div",
+    "cls": "bfs-filter",
+    "id": "",
+    "aria": null,
+    "childCount": 9,
+    "textSnippet": "All LocationsIndustriesListing Types Price Range More Filters FiltersClearSave SearchSave"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar industry-btn hide-on-mobile",
+    "id": "",
+    "aria": null,
+    "childCount": 2,
+    "textSnippet": "Industries"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar listing-types-button listing-type ng-tns-c626507494-3",
+    "id": "",
+    "aria": null,
+    "childCount": 1,
+    "textSnippet": "Listing Types"
+  },
+  {
+    "tag": "i",
+    "cls": "filter-caret ng-tns-c626507494-3",
+    "id": "",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": ""
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar priceRange ng-tns-c48693050-4",
+    "id": "",
+    "aria": null,
+    "childCount": 1,
+    "textSnippet": "Price Range"
+  },
+  {
+    "tag": "i",
+    "cls": "filter-caret ng-tns-c48693050-4",
+    "id": "",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": ""
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar more-filter-button hide-on-mobile",
+    "id": "moreSearch",
+    "aria": null,
+    "childCount": 1,
+    "textSnippet": "More Filters"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar more-filter-button hide-desktop",
+    "id": "",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": "Filters"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar hide-on-mobile clear-filter",
+    "id": "clear",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": "Clear"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar save save-search hide-on-mobile hide-on-tablet ng-tns-c4219813880-5 ng-star-inserted",
+    "id": "linkSaveSearchModal",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": "Save Search"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter-bar save save-search hide-on-desktop hide-on-mobile ng-tns-c4219813880-5 ng-star-inserted",
+    "id": "linkSaveSearchModal",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": "Save"
+  },
+  {
+    "tag": "button",
+    "cls": "btn filter cta su",
+    "id": "",
+    "aria": null,
+    "childCount": 0,
+    "textSnippet": "Sign up now"
+  },
+  {
+    "tag": "div",
+    "cls": "bfs-fixed-bar",
+    "id": "bfs-filter-bar",
+    "aria": null,
+    "childCount": 1,
+    "textSnippet": "All LocationsIndustriesListing Types Price Range More Filters FiltersClearSave SearchSave"
+  }
+]

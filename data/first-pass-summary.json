@@ -1,0 +1,168 @@
+{
+  "startedAt": "2026-04-17T04:08:29.899Z",
+  "finishedAt": "2026-04-17T04:16:20.277Z",
+  "states": [
+    "oklahoma",
+    "texas",
+    "arkansas"
+  ],
+  "industries": [
+    "service",
+    "plumbing",
+    "hvac",
+    "pest-control",
+    "cleaning",
+    "building-and-construction"
+  ],
+  "perCombo": {
+    "oklahoma/service": 36,
+    "oklahoma/plumbing": 2,
+    "oklahoma/hvac": 6,
+    "oklahoma/pest-control": 1,
+    "oklahoma/cleaning": 3,
+    "oklahoma/building-and-construction": 23,
+    "texas/service": 32,
+    "texas/plumbing": 2,
+    "texas/hvac": 13,
+    "texas/pest-control": 4,
+    "texas/cleaning": 35,
+    "texas/building-and-construction": 44,
+    "arkansas/service": 18,
+    "arkansas/plumbing": 0,
+    "arkansas/hvac": 0,
+    "arkansas/pest-control": 0,
+    "arkansas/cleaning": 2,
+    "arkansas/building-and-construction": 4
+  },
+  "totals": {
+    "rawCards": 225,
+    "uniqueCards": 181,
+    "detailFetched": 0,
+    "scored": 181,
+    "kept": 160,
+    "disqualified": 21
+  },
+  "topTen": [
+    {
+      "score": 40,
+      "listingId": "2476513",
+      "title": "Turnkey Aircraft Detailing Business – Recurring Contracts",
+      "ask": null,
+      "sde": null,
+      "url": "https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/",
+      "flags": [
+        "no-asking-price",
+        "no-sde",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 40,
+      "listingId": "2462401",
+      "title": "Established Central Texas Painting Contractor | Trained Crews",
+      "ask": null,
+      "sde": 365788,
+      "url": "https://www.bizbuysell.com/business-opportunity/established-central-texas-painting-contractor-trained-crews/2462401/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 35,
+      "listingId": "2400908",
+      "title": "Great Corpus Christi turnkey pool route",
+      "ask": null,
+      "sde": 103549,
+      "url": "https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2481861",
+      "title": "High-Demand Heating Cooling Repair Technicians",
+      "ask": null,
+      "sde": 425506,
+      "url": "https://www.bizbuysell.com/business-opportunity/high-demand-heating-cooling-repair-technicians/2481861/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2469359",
+      "title": "Rapidly Growing HVAC Company in North Texas | Turnkey Operations",
+      "ask": null,
+      "sde": 590000,
+      "url": "https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2477118",
+      "title": "Profitable HVAC Business with Strong Brand | Semi-Absentee Owner",
+      "ask": null,
+      "sde": 245519,
+      "url": "https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2484468",
+      "title": "Profitable Pest Control Business: Turnkey & Recession Proof",
+      "ask": null,
+      "sde": 254562,
+      "url": "https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2452631",
+      "title": "Stable Route-Based Business with Long-Term Clients",
+      "ask": null,
+      "sde": 97616,
+      "url": "https://www.bizbuysell.com/business-opportunity/stable-route-based-business-with-long-term-clients/2452631/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2289440",
+      "title": "High Vol & Absentee Dry Cleaners /w Property in Dallas Uptown",
+      "ask": null,
+      "sde": 294948,
+      "url": "https://www.bizbuysell.com/business-opportunity/high-vol-and-absentee-dry-cleaners-w-property-in-dallas-uptown/2289440/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    },
+    {
+      "score": 33,
+      "listingId": "2467864",
+      "title": "Profitable Pressure Washing Business: Turnkey",
+      "ask": null,
+      "sde": 370611,
+      "url": "https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/",
+      "flags": [
+        "no-asking-price",
+        "no-revenue"
+      ]
+    }
+  ]
+}
