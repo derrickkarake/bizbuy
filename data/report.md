@@ -1,6 +1,6 @@
 # BizBuySell first-pass report (rubric v2)
 
-_Generated 2026-04-17 05:07_
+_Generated 2026-04-17 05:42_
 
 ## Totals
 

@@ -120,18 +120,52 @@
   }
   canvas { max-height: 220px; }
 
-  details.methodology {
+  /* Rubric section */
+  .rubric-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem;
+  }
+  .rubric-card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; padding: .75rem 1rem; margin-top: 2rem;
+    border-radius: 8px; padding: .85rem .9rem;
   }
-  details.methodology summary {
-    cursor: pointer; font-weight: 600; font-size: 13px;
+  .rubric-card .pts {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 600; padding: 1px 7px;
+    border-radius: 10px; margin-left: .35rem;
+    font-variant-numeric: tabular-nums;
   }
-  details.methodology ul { font-size: 13px; color: var(--text); margin: .5rem 0 0; }
+  .rubric-card h4 {
+    margin: 0 0 .25rem; font-size: 13px; font-weight: 600;
+    display: flex; align-items: center;
+  }
+  .rubric-card .why {
+    color: var(--muted); font-size: 12px; margin: 0 0 .5rem; line-height: 1.4;
+  }
+  .rubric-card ul.tiers {
+    margin: 0; padding: 0; list-style: none; font-size: 12px;
+  }
+  .rubric-card ul.tiers li {
+    padding: 2px 0; display: flex; align-items: baseline; gap: .5rem;
+  }
+  .rubric-card ul.tiers .tier-pts {
+    font-weight: 600; font-variant-numeric: tabular-nums; min-width: 28px;
+    text-align: right; color: var(--accent);
+  }
+  .rubric-card ul.tiers .tier-pts.zero { color: var(--muted); }
+
+  .rubric-extra {
+    display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: .75rem;
+  }
+  .rubric-extra .rubric-card h4 { margin-bottom: .5rem; }
+  .rubric-extra ul { margin: 0; padding-left: 1.1rem; font-size: 12.5px; line-height: 1.55; }
+  .rubric-extra .red-card { border-color: #fecaca; background: #fef2f2; }
+  .rubric-extra .red-card h4 { color: #991b1b; }
 
   @media (max-width: 900px) {
     .kpi-strip { grid-template-columns: repeat(2, 1fr); }
     .charts { grid-template-columns: 1fr; }
+    .rubric-grid { grid-template-columns: repeat(2, 1fr); }
+    .rubric-extra { grid-template-columns: 1fr; }
     td.title-cell { max-width: 200px; }
   }
 </style></head>
@@ -140,7 +174,7 @@
 
 <header>
   <h1>BizBuySell Acquisition Targets</h1>
-  <div class="sub">Rubric v2 · 169 listings · OK/TX/AR scrape + memo additions · generated Apr 17, 2026</div>
+  <div class="sub"><a href="#rubric" style="color:var(--accent);text-decoration:none">Rubric v2</a> · 169 listings · OK/TX/AR scrape + memo additions · generated Apr 17, 2026</div>
 </header>
 
 <div class="kpi-strip">
@@ -583,21 +617,115 @@
   <div class="chart-card"><h3>By industry</h3><canvas id="indChart"></canvas></div>
 </div>
 
-<details class="methodology">
-  <summary>Rubric v2 — how scores are calculated</summary>
-  <ul>
-    <li><b>Scheduling / route density (20)</b> — routes, territories, dispatch, maintenance agreements.</li>
-    <li><b>Owner workload AI can replace (18)</b> — owner handles CSR/quoting/scheduling/estimates.</li>
-    <li><b>Recurring / contract revenue (15)</b> — explicit recurring %, contracts, memberships.</li>
-    <li><b>Size fit (10)</b> — SDE $100K–$400K, ask $150K–$1.5M, ≤15 employees.</li>
-    <li><b>Price sanity vs regional multiple (8)</b> — OK ≤3.0x, DFW ≤2.85x.</li>
-    <li><b>Margin headroom vs industry benchmark (12)</b> — pest 34%, cleaning 30%, HVAC 22%, etc.</li>
-    <li><b>Absentee / manager-ready (10)</b> — owner-light, 1099 labor, home-based.</li>
-    <li><b>License transferability (7)</b> — penalizes OK/TX regulated trades without qualifier path.</li>
-    <li><b>Soft red flags (−5 each)</b> — customer concentration, tech-dependent, owner-as-face, inflated SDE.</li>
-    <li><b>Hard DQ</b> — franchise, restaurant/medical/legal, ask &gt;$3M, SDE &lt;$50K.</li>
-  </ul>
-</details>
+<h2 id="rubric">Scoring rubric v2<span class="count">100 pts across 8 categories · disqualifiers + soft red flags</span></h2>
+
+<div class="rubric-grid">
+  <div class="rubric-card">
+    <h4>1. Scheduling / route density<span class="pts">20</span></h4>
+    <p class="why">Routes, dispatch, maintenance agreements — gives AI something to optimize.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+20</span> explicit routes, dispatch, agreements, CRM in place</li>
+      <li><span class="tier-pts">+12</span> industry implies it (HVAC, pest, cleaning, plumbing)</li>
+      <li><span class="tier-pts">+6</span> generic service business, no scheduling signal</li>
+      <li><span class="tier-pts zero">+0</span> non-dispatched (retail, e-com, manufacturing)</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>2. Owner workload AI can replace<span class="pts">18</span></h4>
+    <p class="why">Does the owner answer phones, quote, schedule, chase invoices?</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+18</span> owner handles CSR/quoting/scheduling, &lt;10 employees</li>
+      <li><span class="tier-pts">+10</span> small staff (&lt;10) inferred</li>
+      <li><span class="tier-pts">+5</span> 10–25 staff with some admin already</li>
+      <li><span class="tier-pts zero">+0</span> 25+ employees with existing dispatch</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>3. Recurring / contract revenue<span class="pts">15</span></h4>
+    <p class="why">Predictable dispatch = AI ROI + transferable enterprise value.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+15</span> explicit recurring %, contracts, memberships, $/mo</li>
+      <li><span class="tier-pts">+8</span> industry implies recurrence (pest, cleaning, HVAC)</li>
+      <li><span class="tier-pts zero">+0</span> one-off transactional or project-based</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>4. Size fit for side-income<span class="pts">10</span></h4>
+    <p class="why">SBA-financeable, four-person team can start part-time.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+10</span> SDE $100K–$400K, ask $150K–$1.5M, ≤15 emp</li>
+      <li><span class="tier-pts">+5</span> SDE $400K–$750K or ask up to $2M</li>
+      <li><span class="tier-pts zero">+0</span> SDE &lt;$75K, &gt;$1M, or ask &gt;$3M</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>5. Price sanity vs regional multiple<span class="pts">8</span></h4>
+    <p class="why">2025 BizBuySell medians: OKC 2.55x · Tulsa 2.34x · DFW 2.54x · Wichita 2.66x.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+8</span> ask/SDE ≤ regional ceiling (OK 3.0x, DFW 2.85x)</li>
+      <li><span class="tier-pts">+4</span> 1–20% over ceiling (negotiable)</li>
+      <li><span class="tier-pts zero">+0</span> &gt;20% over, or ask/SDE missing</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>6. Margin headroom vs benchmark<span class="pts">12</span></h4>
+    <p class="why">Industry medians: pest 34% · cleaning 30% · landscaping 28% · HVAC/plumbing/electrical 22%.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+12</span> SDE/Rev within healthy band (bench −5 to +15)</li>
+      <li><span class="tier-pts">+6</span> within ±5 pts of band edge</li>
+      <li><span class="tier-pts zero">+0</span> &lt;5% (constrained) or &gt;60% (inflated by owner labor)</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>7. Absentee / manager-ready<span class="pts">10</span></h4>
+    <p class="why">Owner-light = part-time-runnable from day one.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+10</span> absentee, semi-absentee, manager in place, 1099 labor, home-based</li>
+      <li><span class="tier-pts">+5</span> seller willing to stay / train / transition</li>
+      <li><span class="tier-pts zero">+0</span> owner-critical, face-of-business, no qualifier path</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>8. License transferability<span class="pts">7</span></h4>
+    <p class="why">OK/TX regulate plumbing, HVAC, electrical, pesticide work. Buyer must hold it or hire a qualifier.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+7</span> unregulated industry OR seller transitions license OR licensed lead tech stays</li>
+      <li><span class="tier-pts">+3</span> regulated, generic transition support, no explicit qualifier plan</li>
+      <li><span class="tier-pts zero">+0</span> regulated, no qualifier path disclosed</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rubric-extra">
+  <div class="rubric-card red-card">
+    <h4>Hard disqualifiers (score = 0)</h4>
+    <ul>
+      <li>Restaurant, café, food service, medical, dental, legal — any licensed-professional where no qualifier path exists</li>
+      <li>Franchise resale (royalty + territorial drag erases AI margin gains)</li>
+      <li>Asking price &gt; $3M, or SDE &lt; $50K</li>
+      <li>Start-up or pre-revenue</li>
+      <li><b>Note:</b> "Contact for price" listings are <i>deferred</i>, not DQ'd — surfaced separately</li>
+    </ul>
+  </div>
+  <div class="rubric-card">
+    <h4>Soft red flags <span class="pts" style="background:#dc2626">−5 ea</span></h4>
+    <ul>
+      <li><b>Customer concentration</b> — "top customer," "single account represents X%"</li>
+      <li><b>Technician-dependent</b> — "lead tech with us X years," "key employee"</li>
+      <li><b>Owner-as-face</b> — "long-standing personal relationships," "owner's reputation"</li>
+      <li><b>Non-transferable license</b> — "master plumber owner" with no qualifier path</li>
+      <li><b>Inflated SDE</b> — &gt;60% SDE/revenue, usually owner-labor add-back</li>
+      <li><b>Deferred capex</b> — "fleet due for replacement," "equipment end of life"</li>
+    </ul>
+  </div>
+</div>
 
 </div>
 
