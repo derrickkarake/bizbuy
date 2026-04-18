@@ -17,8 +17,8 @@ import type { CardSummary } from '../scrapers/search';
 const CSV_PATH = path.resolve(__dirname, '../data/shortlist-v2.csv');
 const RAW_DIR = path.resolve(__dirname, '../data/raw/detail');
 const NAV_DELAY_MS = 6500;
-const TARGET_NON_MEMO = 30;
-const STATE_FILTER = new Set(['texas', 'oklahoma', 'arkansas']); // narrow to home ring
+const TARGET_NON_MEMO = 50;
+const STATE_FILTER = new Set(['texas', 'oklahoma', 'arkansas', 'kansas']); // drivable ring
 
 type Row = {
   score: number;
