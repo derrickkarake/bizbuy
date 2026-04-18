@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 
 const SRC = path.resolve(__dirname, '../data/shortlist-v2.csv');
+const BROKERS_SRC = path.resolve(__dirname, '../data/brokers.json');
 const OUT_MD = path.resolve(__dirname, '../data/report.md');
 const OUT_HTML = path.resolve(__dirname, '../data/report.html');
 const OUT_INDEX = path.resolve(__dirname, '../index.html');
@@ -42,6 +43,11 @@ const rows = parseCSV(text);
 const header = rows[0];
 const idx = Object.fromEntries(header.map((h, i) => [h, i]));
 const data = rows.slice(1).filter((r) => r[idx['url']]);
+
+type BrokerRec = { brokerName: string | null; brokerUrl: string | null; firmName: string | null; phone: string | null };
+const brokers: Record<string, BrokerRec> = fs.existsSync(BROKERS_SRC)
+  ? JSON.parse(fs.readFileSync(BROKERS_SRC, 'utf8'))
+  : {};
 
 type Rec = {
   score: number;
@@ -184,6 +190,16 @@ function flagPills(flags: string): string {
   }).join('');
 }
 
+function brokerCell(id: string): string {
+  const b = brokers[id];
+  if (!b || !b.brokerName) return '<span class="muted">—</span>';
+  const parts: string[] = [];
+  parts.push(`<span class="broker-name">${b.brokerName}</span>`);
+  if (b.firmName) parts.push(`<span class="broker-firm">${b.firmName}</span>`);
+  if (b.phone) parts.push(`<a class="broker-phone" href="tel:${b.phone}">${b.phone}</a>`);
+  return parts.join('<br>');
+}
+
 function renderRow(r: Rec, i: number): string {
   const cls = r.score >= 60 ? 'hi' : r.score >= 35 ? 'mid-hi' : r.score >= 25 ? 'mid' : 'lo';
   const cf = r.cf !== null ? '$' + r.cf.toLocaleString() : '<span class="muted">—</span>';
@@ -202,6 +218,7 @@ function renderRow(r: Rec, i: number): string {
     <td class="num">${marg}</td>
     <td>${loc}</td>
     <td class="title-cell"><a href="${r.url}" target="_blank" rel="noopener">${r.title.slice(0, 90)}</a></td>
+    <td class="broker-cell">${brokerCell(r.id)}</td>
     <td>${flagPills(r.flags)}</td>
   </tr>`;
 }
@@ -238,7 +255,7 @@ const html = `<!doctype html>
 
   /* KPI strip */
   .kpi-strip {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem;
     margin: 0 0 1.25rem;
   }
   .kpi {
@@ -288,6 +305,11 @@ const html = `<!doctype html>
   td.title-cell a:hover { text-decoration: underline; }
 
   .state { font-variant: small-caps; color: var(--muted); font-size: 12px; letter-spacing: 0.03em; }
+
+  td.broker-cell { font-size: 11.5px; line-height: 1.35; max-width: 160px; }
+  .broker-name { font-weight: 600; }
+  .broker-firm { color: var(--muted); font-size: 11px; }
+  .broker-phone { color: var(--accent); font-variant-numeric: tabular-nums; }
 
   .score {
     display: inline-block; min-width: 30px; padding: 2px 8px;
@@ -391,6 +413,7 @@ const html = `<!doctype html>
   <div class="kpi"><div class="label">With asking price</div><div class="value">${withAsk}</div></div>
   <div class="kpi"><div class="label">With cash flow</div><div class="value">${withCF}</div></div>
   <div class="kpi"><div class="label">Memo-verified</div><div class="value">${records.filter((r) => r.isMemo).length}</div></div>
+  <div class="kpi"><div class="label">With broker contact</div><div class="value">${Object.values(brokers).filter((b) => b.brokerName).length}</div></div>
 </div>
 
 <h2>Top 30 ranked<span class="count">by rubric v2 score</span></h2>
@@ -422,6 +445,7 @@ const html = `<!doctype html>
   <th data-sort="marg" class="num">margin</th>
   <th data-sort="loc">location</th>
   <th data-sort="title">title</th>
+  <th data-sort="broker">broker</th>
   <th>flags</th>
 </tr></thead>
 <tbody>

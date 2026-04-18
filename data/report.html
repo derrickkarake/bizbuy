@@ -30,7 +30,7 @@
 
   /* KPI strip */
   .kpi-strip {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem;
     margin: 0 0 1.25rem;
   }
   .kpi {
@@ -80,6 +80,11 @@
   td.title-cell a:hover { text-decoration: underline; }
 
   .state { font-variant: small-caps; color: var(--muted); font-size: 12px; letter-spacing: 0.03em; }
+
+  td.broker-cell { font-size: 11.5px; line-height: 1.35; max-width: 160px; }
+  .broker-name { font-weight: 600; }
+  .broker-firm { color: var(--muted); font-size: 11px; }
+  .broker-phone { color: var(--accent); font-variant-numeric: tabular-nums; }
 
   .score {
     display: inline-block; min-width: 30px; padding: 2px 8px;
@@ -183,6 +188,7 @@
   <div class="kpi"><div class="label">With asking price</div><div class="value">97</div></div>
   <div class="kpi"><div class="label">With cash flow</div><div class="value">449</div></div>
   <div class="kpi"><div class="label">Memo-verified</div><div class="value">10</div></div>
+  <div class="kpi"><div class="label">With broker contact</div><div class="value">1</div></div>
 </div>
 
 <h2>Top 30 ranked<span class="count">by rubric v2 score</span></h2>
@@ -214,6 +220,7 @@
   <th data-sort="marg" class="num">margin</th>
   <th data-sort="loc">location</th>
   <th data-sort="title">title</th>
+  <th data-sort="broker">broker</th>
   <th>flags</th>
 </tr></thead>
 <tbody>
@@ -228,6 +235,7 @@
     <td class="num">33%</td>
     <td>Sedgwick County, KS</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-turnkey-fully-staffed-300k-income/2481252/" target="_blank" rel="noopener">Commercial Cleaning – Turnkey, Fully Staffed - $300K Income</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill ok">memo-sourced</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="112" data-state="kansas" data-industry="service" data-memo="0">
@@ -241,6 +249,7 @@
     <td class="num">29%</td>
     <td>D Routes- Condensed South Kansas City, MO</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/sale-pending-9-fedex-pandd-routes-condensed-south-kansas-city-mo/2276327/" target="_blank" rel="noopener">Sale Pending- 9 FedEx P&D Routes- Condensed South Kansas City, MO</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="99" data-state="texas" data-industry="cleaning" data-memo="0">
@@ -254,6 +263,7 @@
     <td class="num">31%</td>
     <td>Houston, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/property-cleaning-and-maintenance-business/2482248/" target="_blank" rel="noopener">Property Cleaning & Maintenance Business</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="97" data-state="oklahoma" data-industry="hvac" data-memo="1">
@@ -267,6 +277,7 @@
     <td class="num">38%</td>
     <td>Oklahoma City, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/residential-hvac-serving-oklahoma-city/2455476/" target="_blank" rel="noopener">Residential HVAC Serving Oklahoma City</a></td>
+    <td class="broker-cell"><span class="broker-name">Patrick Lange</span><br><span class="broker-firm">Business Modification Group</span><br><a class="broker-phone" href="tel:352-646-3218">352-646-3218</a></td>
     <td><span class="pill ok">memo-sourced</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="94" data-state="arkansas" data-industry="service" data-memo="0">
@@ -280,6 +291,7 @@
     <td class="num">38%</td>
     <td>Washington County, AR</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/commercial-cleaning-8-10-hrs-week-156k-contracted-annual-revenue/2489667/" target="_blank" rel="noopener">Commercial Cleaning | 8-10 Hrs/Week | $156K Contracted Annual Revenue</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="93" data-state="virginia" data-industry="cleaning" data-memo="0">
@@ -293,6 +305,7 @@
     <td class="num">39%</td>
     <td>Virginia Beach, VA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/25-year-carpet-cleaning-semi-absentee-seller-financing/2473232/" target="_blank" rel="noopener">25 Year Carpet Cleaning  - Semi Absentee - Seller Financing</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="93" data-state="texas" data-industry="cleaning" data-memo="0">
@@ -306,6 +319,7 @@
     <td class="num">45%</td>
     <td>Fort Worth, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/" target="_blank" rel="noopener">Profitable Pressure Washing Business: Turnkey</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="93" data-state="texas" data-industry="cleaning" data-memo="0">
@@ -319,6 +333,7 @@
     <td class="num">23%</td>
     <td>Houston, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/recurring-property-maintenance-business/2485180/" target="_blank" rel="noopener">Recurring Property Maintenance Business</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="93" data-state="texas" data-industry="hvac" data-memo="0">
@@ -332,6 +347,7 @@
     <td class="num">32%</td>
     <td>Tarrant County, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/" target="_blank" rel="noopener">Profitable HVAC Business with Strong Brand | Semi-Absentee Owner</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill red">license-risk</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="93" data-state="texas" data-industry="pest-control" data-memo="1">
@@ -345,6 +361,7 @@
     <td class="num">45%</td>
     <td>Tarrant County, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/" target="_blank" rel="noopener">Profitable Pest Control Business: Turnkey & Recession Proof</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill red">license-risk</span><span class="pill ok">memo-verified</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="92" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -358,6 +375,7 @@
     <td class="num">19%</td>
     <td>Warr Acres, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/the-ups-store-in-nw-okc-111-750-sde-seller-financing/2403459/" target="_blank" rel="noopener">The UPS Store in NW OKC | $111,750 SDE | Seller Financing</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">price-high:3.67x-vs-3.00x</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="91" data-state="california" data-industry="cleaning" data-memo="0">
@@ -371,6 +389,7 @@
     <td class="num">58%</td>
     <td>Santa Clara County, CA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-window-and-gutter-cleaning-business-high-recurring-revenue/2389517/" target="_blank" rel="noopener">Established Window & Gutter Cleaning Business – High Recurring Revenue</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="91" data-state="texas" data-industry="building-and-construction" data-memo="0">
@@ -384,6 +403,7 @@
     <td class="num">25%</td>
     <td><span class="muted">—</span></td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-central-texas-painting-contractor-trained-crews/2462401/" target="_blank" rel="noopener">Established Central Texas Painting Contractor | Trained Crews</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">red:customer-concentration</span><span class="pill warn">red:owner-face</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="90" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -397,6 +417,7 @@
     <td class="num">32%</td>
     <td>Oklahoma City, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/home-improvement-siding-business-in-oklahoma-city/2367468/" target="_blank" rel="noopener">Home Improvement Siding Business in Oklahoma City</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="89" data-state="texas" data-industry="hvac" data-memo="0">
@@ -410,6 +431,7 @@
     <td class="num">24%</td>
     <td>Arlington, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/" target="_blank" rel="noopener">Rapidly Growing HVAC Company in North Texas | Turnkey Operations</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">price-high:4.24x-vs-2.85x</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="88" data-state="california" data-industry="cleaning" data-memo="0">
@@ -423,6 +445,7 @@
     <td class="num">30%</td>
     <td>Orange County, CA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/absentee-commercial-janitorial-business-non-sba/2458392/" target="_blank" rel="noopener">Absentee Commercial Janitorial Business | NON-SBA</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="87" data-state="texas" data-industry="cleaning" data-memo="0">
@@ -436,6 +459,7 @@
     <td class="num"><span class="muted">—</span></td>
     <td>Southlake, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/dfw-area-3-unit-pinks-window-cleaning-priced-way-less-than-new/2423238/" target="_blank" rel="noopener">DFW Area 3-Unit Pink's Window Cleaning - Priced Way Less Than New!</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill muted">no-sde</span><span class="pill muted">no-revenue</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="86" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -449,6 +473,7 @@
     <td class="num">15%</td>
     <td>Stillwater, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/flowers-bread-route-stillwater-ok/2455537/" target="_blank" rel="noopener">Flowers Bread Route, Stillwater, OK</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="84" data-state="arkansas" data-industry="service" data-memo="0">
@@ -462,6 +487,7 @@
     <td class="num">20%</td>
     <td>Sebastian County, AR</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/45-year-two-way-radio-sales-and-service-business-w-recurring-revenue/2488772/" target="_blank" rel="noopener">45-Year Two-Way Radio Sales & Service Business w/ Recurring Revenue</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="83" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -475,6 +501,7 @@
     <td class="num">19%</td>
     <td>Tulsa, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-tulsa-metro-cleaning-business-high-recurring-revenue/2469127/" target="_blank" rel="noopener">Established Tulsa Metro Cleaning Business | High Recurring Revenue</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill muted">no-asking-price</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="82" data-state="oklahoma" data-industry="hvac" data-memo="0">
@@ -488,6 +515,7 @@
     <td class="num">19%</td>
     <td>Tulsa, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/high-demand-heating-cooling-repair-technicians/2481861/" target="_blank" rel="noopener">High-Demand Heating Cooling Repair Technicians</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill red">license-risk</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="82" data-state="kansas" data-industry="cleaning" data-memo="0">
@@ -501,6 +529,7 @@
     <td class="num"><span class="muted">—</span></td>
     <td>Established Junk Removal and Recycling Business - Kansas City, MO</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/established-junk-removal-and-recycling-business-kansas-city-mo/2477659/" target="_blank" rel="noopener">Established Junk Removal and Recycling Business - Kansas City, MO</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill muted">no-sde</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="82" data-state="texas" data-industry="building-and-construction" data-memo="0">
@@ -514,6 +543,7 @@
     <td class="num">15%</td>
     <td>Fort Bend County, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/trusted-electrical-contractor-offering-all-services/2483476/" target="_blank" rel="noopener">Trusted Electrical Contractor Offering All Services</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="81" data-state="massachusetts" data-industry="cleaning" data-memo="1">
@@ -527,6 +557,7 @@
     <td class="num">45%</td>
     <td>Middlesex County, MA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/sba-high-margin-cleaning-business-718k-revenue-287-963k-sde/2489131/" target="_blank" rel="noopener">SBA High-Margin Cleaning Business $718,200 Revenue | $315,425 SDE</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill ok">memo-sourced</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="81" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -540,6 +571,7 @@
     <td class="num">21%</td>
     <td>Oklahoma County, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/absentee-owner-multi-city-mobile-detailing-company/2302724/" target="_blank" rel="noopener">Absentee Owner, Multi City Mobile Detailing Company</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="80" data-state="california" data-industry="cleaning" data-memo="0">
@@ -553,6 +585,7 @@
     <td class="num">32%</td>
     <td>Salida, CA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-turnkey-business-306k-sde-seller-financing-available/2480888/" target="_blank" rel="noopener">Profitable Turnkey Business-$306k SDE-Seller Financing Available</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="80" data-state="oklahoma" data-industry="service" data-memo="0">
@@ -566,6 +599,7 @@
     <td class="num">60%</td>
     <td>Moore, OK</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/profitable-turnkey-lawn-spraying-business/2494683/" target="_blank" rel="noopener">Profitable Turnkey Lawn Spraying Business.</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">price-high:3.67x-vs-3.00x</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="80" data-state="texas" data-industry="building-and-construction" data-memo="0">
@@ -579,6 +613,7 @@
     <td class="num">33%</td>
     <td>Arlington, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/radiant-barrier-manufacturing-turnkey-energy-insulation/2431770/" target="_blank" rel="noopener">Radiant Barrier Manufacturing | Turnkey Energy Insulation</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">price-high:4.53x-vs-2.85x</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="79" data-state="california" data-industry="cleaning" data-memo="1">
@@ -592,6 +627,7 @@
     <td class="num">27%</td>
     <td>Orange County, CA</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/30-year-janitorial-company-90-recurring-revenue-absentee-ready/2491534/" target="_blank" rel="noopener">30-Year Janitorial Company | 90%+ Recurring Revenue | Absentee-Ready</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill warn">price-high:3.68x-vs-3.00x</span><span class="pill ok">memo-sourced</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 <tr data-score="79" data-state="texas" data-industry="cleaning" data-memo="0">
@@ -605,6 +641,7 @@
     <td class="num"><span class="muted">—</span></td>
     <td>Lubbock, TX</td>
     <td class="title-cell"><a href="https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/" target="_blank" rel="noopener">Turnkey Aircraft Detailing Business – Recurring Contracts</a></td>
+    <td class="broker-cell"><span class="muted">—</span></td>
     <td><span class="pill muted">no-sde</span><span class="pill warn">detail-scraped</span></td>
   </tr>
 </tbody></table>
