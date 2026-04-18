@@ -20,8 +20,8 @@ import { scoreListing } from '../analysis/score';
 const CSV_PATH = path.resolve(__dirname, '../data/shortlist-v2.csv');
 const RAW_DIR = path.resolve(__dirname, '../data/raw/wide-scrape');
 
-const STATES = ['kansas', 'massachusetts', 'california', 'new-york', 'ohio', 'virginia', 'florida'];
-const INDUSTRIES = ['hvac', 'plumbing', 'pest-control', 'cleaning'];
+const STATES = ['california', 'new-york', 'ohio', 'virginia', 'florida'];
+const INDUSTRIES = ['service', 'building-and-construction'];
 
 const BASE = 'https://www.bizbuysell.com';
 const NAV_DELAY_MS = 6500;

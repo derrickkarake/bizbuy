@@ -436,7 +436,7 @@ ${top30.map((r, i) => renderRow(r, i)).join('\n')}
   <div class="chart-card"><h3>By industry</h3><canvas id="indChart"></canvas></div>
 </div>
 
-<h2 id="rubric">Scoring rubric v2<span class="count">100 pts across 8 categories · disqualifiers + soft red flags</span></h2>
+<h2 id="rubric">Scoring rubric v2<span class="count">120 pts across 9 categories · disqualifiers + soft red flags</span></h2>
 
 <div class="rubric-grid">
   <div class="rubric-card">
@@ -518,6 +518,18 @@ ${top30.map((r, i) => renderRow(r, i)).join('\n')}
       <li><span class="tier-pts">+7</span> unregulated industry OR seller transitions license OR licensed lead tech stays</li>
       <li><span class="tier-pts">+3</span> regulated, generic transition support, no explicit qualifier plan</li>
       <li><span class="tier-pts zero">+0</span> regulated, no qualifier path disclosed</li>
+    </ul>
+  </div>
+
+  <div class="rubric-card">
+    <h4>9. Proximity to Oklahoma<span class="pts">20</span></h4>
+    <p class="why">Oversight cost &amp; transition travel. Memo's ring-based geography: home, drivable, nearby, far.</p>
+    <ul class="tiers">
+      <li><span class="tier-pts">+20</span> Oklahoma (home state)</li>
+      <li><span class="tier-pts">+12</span> Texas, Arkansas, Kansas (drivable 4–6h)</li>
+      <li><span class="tier-pts">+7</span> Missouri, New Mexico, Louisiana (nearby)</li>
+      <li><span class="tier-pts">+3</span> Sun Belt / SE (FL, CO, TN, GA, Carolinas, AZ, NV)</li>
+      <li><span class="tier-pts zero">+0</span> anywhere further (CA, NY, MA, OH, VA, etc.)</li>
     </ul>
   </div>
 </div>

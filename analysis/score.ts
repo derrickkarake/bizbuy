@@ -21,6 +21,7 @@ export type ScoredListing = {
     marginBenchmark: number;
     absenteeFit: number;
     licenseTransferability: number;
+    okProximity: number;
     softPenalty: number;
   };
   sdeMultiple: number | null;
@@ -103,6 +104,28 @@ function textHas(haystack: string, needles: string[]): string | null {
   for (const n of needles) if (hay.includes(n)) return n;
   return null;
 }
+
+// Proximity to Oklahoma (home base). Tiers match the memo's geographic
+// recommendation: ring 1 = OK itself; ring 2 = drivable 4–6 hour radius
+// (TX, AR, KS); ring 3 = nearby central US (MO, NM, LA); ring 4 = broader
+// Sun Belt / Southeast.
+const OK_PROXIMITY: Record<string, number> = {
+  'oklahoma': 20,
+  'texas': 12,
+  'arkansas': 12,
+  'kansas': 12,
+  'missouri': 7,
+  'new-mexico': 7,
+  'louisiana': 7,
+  'colorado': 3,
+  'tennessee': 3,
+  'georgia': 3,
+  'south-carolina': 3,
+  'north-carolina': 3,
+  'florida': 3,
+  'arizona': 3,
+  'nevada': 3,
+};
 
 // Regional multiple ceilings, keyed by state slug. DFW (TX metro) is tighter.
 function regionalMultipleCeiling(stateSlug: string, location: string | null): number {
@@ -242,6 +265,9 @@ export function scoreListing(
     licenseTransferability = 5;
   }
 
+  // --- category 9: proximity to Oklahoma (20) ---
+  const okProximity = OK_PROXIMITY[stateSlug] ?? 0;
+
   // --- soft red flags (subtract, capped at 15) ---
   let softPenalty = 0;
   const redFlagChecks: Array<[string, string[]]> = [
@@ -272,7 +298,8 @@ export function scoreListing(
     priceSanity +
     marginBenchmark +
     absenteeFit +
-    licenseTransferability;
+    licenseTransferability +
+    okProximity;
 
   const score = disqualified ? 0 : Math.max(0, positive - softPenalty);
 
@@ -290,6 +317,7 @@ export function scoreListing(
       marginBenchmark,
       absenteeFit,
       licenseTransferability,
+      okProximity,
       softPenalty,
     },
     sdeMultiple,

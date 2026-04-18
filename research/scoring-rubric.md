@@ -4,9 +4,9 @@ Updated 2026-04-16 with licensing, regional multiple, route-density, and custome
 
 Thesis: buy a small service business in OK/TX/AR that (a) is small enough to run part-time with a 4-person team, (b) has operational friction an AI agent can absorb (call capture, scheduling, dispatch, quote follow-up, renewal nudges), (c) has recurring route or contract revenue, and (d) doesn't require a license the buyer doesn't hold.
 
-Each listing is scored 0–100. Sub-scores sum. Detail-page fields get more weight; card-only listings get partial credit from keywords. Disqualifiers short-circuit to score 0.
+Each listing is scored 0–120. Sub-scores sum. Detail-page fields get more weight; card-only listings get partial credit from keywords. Disqualifiers short-circuit to score 0.
 
-## Categories (100 pts)
+## Categories (120 pts)
 
 ### 1. Scheduling / route density (20 pts)
 Route-based or dispatch-heavy → AI has something to optimize.
@@ -59,6 +59,14 @@ OK/TX/AR all regulate trade work. OK specifically: plumbing / HVAC / electrical 
 - +3 — Regulated industry with seller willing to stay (generic "transition support") but no explicit qualifier plan.
 - +0 — Regulated industry, no qualifier path disclosed. (Not an auto-DQ — buyer may hold license or hire qualifier — but penalizes until verified.)
 
+### 9. Proximity to Oklahoma (20 pts)
+Home-base proximity: oversight cost, transition travel, dispatch response. Memo's ring geography.
+- +20 — Oklahoma (home state)
+- +12 — Texas, Arkansas, Kansas (drivable 4–6h, memo's ring two)
+- +7 — Missouri, New Mexico, Louisiana (nearby central US)
+- +3 — Broader Sun Belt / Southeast (FL, CO, TN, GA, NC, SC, AZ, NV)
+- +0 — Further afield (CA, NY, MA, OH, VA, and anywhere else)
+
 ## Hard disqualifiers (score 0)
 
 - Industries: restaurant, cafe, food service, medical, dental, legal, any licensed-professional-required where no qualifier path exists.
@@ -95,5 +103,6 @@ Sorted by score desc. DQ'd listings excluded (count reported). Deferred (no-pric
 
 ## Changelog
 
+- **v2.2 (2026-04-18)** — added proximity-to-Oklahoma (cat 9, 20 pts); max score 100 → 120; broadened franchise DQ to catch "\bfranchise\b" in title and "established X franchise" / "franchise model" in detail description.
 - **v2 (2026-04-16)** — added license transferability (cat 8), price sanity vs regional multiple (cat 5), replaced flat margin band with industry-specific benchmark, added route-density to scheduling category, formalized soft red flags.
 - **v1** — initial 6-category rubric (scheduling, owner workload, recurring, size fit, margin, absentee).
