@@ -145,6 +145,13 @@ export function scoreListing(
     disqualified = true;
     flags.push('dq:industry-keyword');
   }
+  // Franchise resale catch-all: title containing "franchise" is almost
+  // always a franchise resale, regardless of phrasing. Also catches
+  // detail descriptions that explicitly identify as franchise.
+  if (/\bfranchise\b/i.test(title) || /established\s+\w+\s+franchise|franchise model|is a franchise/i.test(desc)) {
+    disqualified = true;
+    flags.push('dq:franchise');
+  }
   if (ask !== null && ask > 3_000_000) {
     disqualified = true;
     flags.push('dq:too-expensive');

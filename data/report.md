@@ -1,6 +1,6 @@
 # BizBuySell first-pass report (rubric v2)
 
-_Generated 2026-04-18 05:41_
+_Generated 2026-04-18 06:43_
 
 ## Totals
 
@@ -8,79 +8,84 @@ _Generated 2026-04-18 05:41_
 |---|---|
 | Listings scored | 330 |
 | With cash flow | 240 |
-| With asking price | 12 |
-| Deferred (price hidden) | 318 |
+| With asking price | 42 |
+| Deferred (price hidden) | 288 |
 | Memo-verified | 10 |
 
 ## Score distribution
 
--  80-84: 1
--  75-79: 2
--  70-74: 2
--  60-64: 1
+- 100-104: 1
+-  90-94: 2
+-  85-89: 1
+-  80-84: 6
+-  75-79: 4
+-  70-74: 1
+-  65-69: 4
+-  60-64: 7
 -  55-59: 2
--  40-44: 2
--  35-39: 19
--  30-34: 16
+-  50-54: 1
+-  40-44: 1
+-  35-39: 3
+-  30-34: 4
 -  25-29: 123
 -  20-24: 62
 -  10-14: 99
--    0-4: 1
+-    0-4: 9
 
 ## By state
 
 | state | listings | avg score |
 |---|---|---|
-| texas | 95 | 20.5 |
-| florida | 52 | 25.6 |
-| oklahoma | 50 | 17.9 |
-| california | 49 | 26.3 |
-| ohio | 20 | 26.9 |
-| new-york | 19 | 24.2 |
+| texas | 95 | 22.9 |
+| florida | 52 | 27.0 |
+| oklahoma | 50 | 17.4 |
+| california | 49 | 30.8 |
+| ohio | 20 | 27.4 |
+| new-york | 19 | 23.9 |
 | arkansas | 17 | 18.6 |
-| massachusetts | 14 | 27.1 |
-| virginia | 10 | 33.0 |
-| kansas | 4 | 39.5 |
+| massachusetts | 14 | 30.1 |
+| virginia | 10 | 29.3 |
+| kansas | 4 | 43.5 |
 
 ## By industry
 
 | industry | listings | avg score |
 |---|---|---|
-| landscaping | 1 | 60.0 |
-| electrical | 1 | 56.0 |
-| cleaning | 115 | 30.4 |
-| pest-control | 12 | 30.3 |
-| hvac | 60 | 22.1 |
+| landscaping | 1 | 55.0 |
+| cleaning | 115 | 34.5 |
+| pest-control | 12 | 32.9 |
+| hvac | 60 | 23.7 |
 | service | 78 | 17.7 |
-| plumbing | 25 | 17.4 |
+| plumbing | 25 | 16.6 |
 | building-and-construction | 38 | 14.0 |
+| electrical | 1 | 0.0 |
 
 ## Top 25
 
 | # | score | state | industry | cash flow | asking | location | title |
 |---|---|---|---|---|---|---|---|
-| 1 | 84 | kansas | cleaning | $300,615 | $740,000 | Sedgwick County, KS | [Commercial Cleaning – Turnkey, Fully Staffed - $300K Income](https://www.bizbuysell.com/business-opportunity/commercial-cleaning-turnkey-fully-staffed-300k-income/2481252/) |
-| 2 | 78 | massachusetts | cleaning | $326,402 | $895,000 | Middlesex County, MA | [SBA High-Margin Cleaning Business $718.2K Rev / $326K SDE](https://www.bizbuysell.com/business-opportunity/sba-high-margin-cleaning-business-718k-revenue-287-963k-sde/2489131/) |
-| 3 | 76 | texas | pest-control | $254,562 | $800,000 | Tarrant County, TX | [Profitable Pest Control Business: Turnkey & Recession Proof](https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/) |
-| 4 | 74 | oklahoma | hvac | $220,357 | $550,000 | Oklahoma City, OK | [Residential HVAC Serving Oklahoma City](https://www.bizbuysell.com/business-opportunity/residential-hvac-serving-oklahoma-city/2455476/) |
-| 5 | 71 | california | cleaning | $190,000 | $700,000 | Orange County, CA | [30-Year Janitorial Company / 90%+ Recurring Revenue / Absentee-Ready](https://www.bizbuysell.com/business-opportunity/30-year-janitorial-company-90-recurring-revenue-absentee-ready/2491534/) |
-| 6 | 60 | new-york | landscaping | $135,000 | $99,000 | Erie County, NY | [Highly Recurring Landscaping Biz / $200K Rev / $135K+ SDE / $40K Down](https://www.bizbuysell.com/business-opportunity/highly-recurring-landscaping-biz-200k-rev-135k-sde-40k-down/2495059/) |
-| 7 | 56 | virginia | electrical | $250,000 | $500,000 | Richmond, VA | [Respected, Multi Decade Electrical Contracting Company](https://www.bizbuysell.com/business-opportunity/respected-multi-decade-electrical-contracting-company/2176524/) |
-| 8 | 56 | ohio | plumbing | $145,000 | $375,000 | Summit County, OH | [Successful Northern Summit County Plumbing Company](https://www.bizbuysell.com/business-opportunity/successful-northern-summit-county-plumbing-company/2476477/) |
-| 9 | 44 | texas | cleaning | — | — | Lubbock, TX | [Turnkey Aircraft Detailing Business – Recurring Contracts](https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/) |
-| 10 | 44 | ohio | cleaning | $415,728 | — | Clermont County, OH | [Turnkey Growing Commercial Cleaning Franchise w Recurring Revenue](https://www.bizbuysell.com/business-opportunity/turnkey-growing-commercial-cleaning-franchise-w-recurring-revenue/2474379/) |
-| 11 | 38 | virginia | pest-control | $135,000 | $375,000 | Richmond, VA | [Exceptional Termite Control Company Tremendous Growth Potential](https://www.bizbuysell.com/business-opportunity/exceptional-termite-control-company-tremendous-growth-potential/2331056/) |
-| 12 | 38 | florida | hvac | $380,684 | $799,999 | High Net Electric Company In Martin County, FL | [High Net Electric Company In Martin County, FL](https://www.bizbuysell.com/business-opportunity/high-net-electric-company-in-martin-county-fl/2432301/) |
-| 13 | 37 | texas | service | $103,549 | — | Corpus Christi, TX | [Great Corpus Christi turnkey pool route](https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/) |
-| 14 | 37 | texas | cleaning | $294,948 | — | Dallas, TX | [High Vol & Absentee Dry Cleaners /w Property in Dallas Uptown](https://www.bizbuysell.com/business-opportunity/high-vol-and-absentee-dry-cleaners-w-property-in-dallas-uptown/2289440/) |
-| 15 | 37 | texas | cleaning | $370,611 | — | Fort Worth, TX | [Profitable Pressure Washing Business: Turnkey](https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/) |
-| 16 | 37 | california | cleaning | $306,000 | — | Salida, CA | [Profitable Turnkey Business-$306k SDE-Seller Financing Available](https://www.bizbuysell.com/business-opportunity/profitable-turnkey-business-306k-sde-seller-financing-available/2480888/) |
-| 17 | 37 | california | cleaning | $191,666 | — | Orange County, CA | [Absentee Commercial Janitorial Business / NON-SBA](https://www.bizbuysell.com/business-opportunity/absentee-commercial-janitorial-business-non-sba/2458392/) |
-| 18 | 37 | california | cleaning | $130,000 | — | Mountain House, CA | [Turnkey Carpet Cleaning & Restoration Biz – 3k Clients, $12K Monthly](https://www.bizbuysell.com/business-opportunity/turnkey-carpet-cleaning-and-restoration-biz-3k-clients-12k-monthly/2480768/) |
-| 19 | 37 | california | cleaning | — | — | — | [Absentee Carpet & Upholstery Business Established Clients](https://www.bizbuysell.com/business-opportunity/absentee-carpet-and-upholstery-business-established-clients/2467437/) |
-| 20 | 37 | california | cleaning | $162,890 | — | Contra Costa County, CA | [High-Growth Gutters Services Franchise / $1.35M Rev / Semi-Absentee](https://www.bizbuysell.com/business-opportunity/high-growth-gutters-services-franchise-1-35m-rev-semi-absentee/2467172/) |
-| 21 | 37 | california | cleaning | — | — | San Mateo County, CA | [Turnkey 60-Year Dry Cleaner in San Mateo County](https://www.bizbuysell.com/business-opportunity/turnkey-60-year-dry-cleaner-in-san-mateo-county/2395498/) |
-| 22 | 37 | ohio | cleaning | $50,000 | — | Clermont County, OH | [Established Cleaning Service / Semi-Absentee Ownership / Scalable](https://www.bizbuysell.com/business-opportunity/established-cleaning-service-semi-absentee-ownership-scalable/2433806/) |
-| 23 | 37 | virginia | cleaning | $140,308 | — | Virginia Beach, VA | [25 Year Carpet Cleaning - Semi Absentee - Seller Financing](https://www.bizbuysell.com/business-opportunity/25-year-carpet-cleaning-semi-absentee-seller-financing/2473232/) |
-| 24 | 37 | virginia | cleaning | $80,000 | — | Roanoke City County, VA | [High Demand Home-Based Cleaning & Repair Franchise](https://www.bizbuysell.com/business-opportunity/high-demand-home-based-cleaning-and-repair-franchise/2323906/) |
-| 25 | 37 | florida | cleaning | $61,988 | — | Hillsborough County, FL | [MOTIVATED SELLER—-Semi- Absentee Pressure Washing Business- Tampa](https://www.bizbuysell.com/business-opportunity/motivated-seller-semi-absentee-pressure-washing-business-tampa/2437760/) |
+| 1 | 100 | kansas | cleaning | $300,615 | $740,000 | Sedgwick County, KS | [Commercial Cleaning – Turnkey, Fully Staffed - $300K Income](https://www.bizbuysell.com/business-opportunity/commercial-cleaning-turnkey-fully-staffed-300k-income/2481252/) |
+| 2 | 93 | virginia | cleaning | $140,308 | $344,500 | Virginia Beach, VA | [25 Year Carpet Cleaning  - Semi Absentee - Seller Financing](https://www.bizbuysell.com/business-opportunity/25-year-carpet-cleaning-semi-absentee-seller-financing/2473232/) |
+| 3 | 91 | california | cleaning | $116,256 | $248,000 | Santa Clara County, CA | [Established Window & Gutter Cleaning Business – High Recurring Revenue](https://www.bizbuysell.com/business-opportunity/established-window-and-gutter-cleaning-business-high-recurring-revenue/2389517/) |
+| 4 | 88 | california | cleaning | $191,666 | $600,000 | Orange County, CA | [Absentee Commercial Janitorial Business / NON-SBA](https://www.bizbuysell.com/business-opportunity/absentee-commercial-janitorial-business-non-sba/2458392/) |
+| 5 | 81 | texas | cleaning | $370,611 | $1,250,000 | Fort Worth, TX | [Profitable Pressure Washing Business: Turnkey](https://www.bizbuysell.com/business-opportunity/profitable-pressure-washing-business-turnkey/2467864/) |
+| 6 | 81 | texas | cleaning | $155,898 | $178,900 | Houston, TX | [Recurring Property Maintenance Business](https://www.bizbuysell.com/business-opportunity/recurring-property-maintenance-business/2485180/) |
+| 7 | 81 | texas | hvac | $245,519 | $725,000 | Tarrant County, TX | [Profitable HVAC Business with Strong Brand / Semi-Absentee Owner](https://www.bizbuysell.com/business-opportunity/profitable-hvac-business-with-strong-brand-semi-absentee-owner/2477118/) |
+| 8 | 81 | texas | pest-control | $254,562 | $800,000 | Tarrant County, TX | [Profitable Pest Control Business: Turnkey & Recession Proof](https://www.bizbuysell.com/business-opportunity/profitable-pest-control-business-turnkey-and-recession-proof/2484468/) |
+| 9 | 81 | massachusetts | cleaning | $326,402 | $895,000 | Middlesex County, MA | [SBA High-Margin Cleaning Business $718,200 Revenue / $315,425 SDE](https://www.bizbuysell.com/business-opportunity/sba-high-margin-cleaning-business-718k-revenue-287-963k-sde/2489131/) |
+| 10 | 80 | california | cleaning | $306,000 | $1,075,000 | Salida, CA | [Profitable Turnkey Business-$306k SDE-Seller Financing Available](https://www.bizbuysell.com/business-opportunity/profitable-turnkey-business-306k-sde-seller-financing-available/2480888/) |
+| 11 | 79 | california | cleaning | $190,000 | $700,000 | Orange County, CA | [30-Year Janitorial Company / 90%+ Recurring Revenue / Absentee-Ready](https://www.bizbuysell.com/business-opportunity/30-year-janitorial-company-90-recurring-revenue-absentee-ready/2491534/) |
+| 12 | 77 | texas | hvac | $590,000 | $2,500,000 | Arlington, TX | [Rapidly Growing HVAC Company in North Texas / Turnkey Operations](https://www.bizbuysell.com/business-opportunity/rapidly-growing-hvac-company-in-north-texas-turnkey-operations/2469359/) |
+| 13 | 77 | oklahoma | hvac | $220,357 | $550,000 | Oklahoma City, OK | [Residential HVAC Serving Oklahoma City](https://www.bizbuysell.com/business-opportunity/residential-hvac-serving-oklahoma-city/2455476/) |
+| 14 | 77 | ohio | cleaning | $50,000 | $159,000 | Clermont County, OH | [Established Cleaning Service / Semi-Absentee Ownership / Scalable](https://www.bizbuysell.com/business-opportunity/established-cleaning-service-semi-absentee-ownership-scalable/2433806/) |
+| 15 | 73 | massachusetts | cleaning | $56,704 | $125,000 | Essex County, MA | [Award-Winning Res Cleaning Business - Essex Co- 100% Recurring Rev](https://www.bizbuysell.com/business-opportunity/award-winning-res-cleaning-business-essex-co-100-recurring-rev/2397023/) |
+| 16 | 67 | texas | cleaning | — | $399,000 | Lubbock, TX | [Turnkey Aircraft Detailing Business – Recurring Contracts](https://www.bizbuysell.com/business-opportunity/turnkey-aircraft-detailing-business-recurring-contracts/2476513/) |
+| 17 | 67 | texas | service | $103,549 | $257,142 | Corpus Christi, TX | [Great Corpus Christi turnkey pool route](https://www.bizbuysell.com/business-opportunity/great-corpus-christi-turnkey-pool-route/2400908/) |
+| 18 | 67 | ohio | cleaning | — | $85,000 | Residential Cleaning Business - Recurring Revenue Lorain County, OH | [Residential Cleaning Business - Recurring Revenue Lorain County, OH](https://www.bizbuysell.com/business-opportunity/residential-cleaning-business-recurring-revenue-lorain-county-oh/2464676/) |
+| 19 | 65 | florida | cleaning | — | $350,000 | Tampa, FL | [Established B2B Facility Services Business with Recurring Revenue](https://www.bizbuysell.com/business-opportunity/established-b2b-facility-services-business-with-recurring-revenue/2460929/) |
+| 20 | 63 | florida | pest-control | $84,182 | $275,000 | Hillsborough County, FL | [Profitable Pest Control Store – Absentee Operated](https://www.bizbuysell.com/business-opportunity/profitable-pest-control-store-absentee-operated/2485638/) |
+| 21 | 63 | florida | cleaning | $60,000 | $85,000 | Palm Beach County, FL | [Profitable Home Cleaning Business / 50+ Recurring Clients / $120K Rev](https://www.bizbuysell.com/business-opportunity/profitable-home-cleaning-business-50-recurring-clients-120k-rev/2485131/) |
+| 22 | 62 | california | cleaning | $130,000 | $150,000 | Mountain House, CA | [Turnkey Carpet Cleaning & Restoration Biz – 3k Clients, $12K Monthly](https://www.bizbuysell.com/business-opportunity/turnkey-carpet-cleaning-and-restoration-biz-3k-clients-12k-monthly/2480768/) |
+| 23 | 60 | california | cleaning | — | $115,000 | Long Beach, CA | [Great 2-Territory Pink's Window Cleaning - Huntington & Long Beach](https://www.bizbuysell.com/business-opportunity/great-2-territory-pinks-window-cleaning-huntington-and-long-beach/2482755/) |
+| 24 | 60 | california | cleaning | — | $67,500 | — | [Absentee Carpet & Upholstery Business Established Clients](https://www.bizbuysell.com/business-opportunity/absentee-carpet-and-upholstery-business-established-clients/2467437/) |
+| 25 | 60 | california | cleaning | — | $135,000 | San Mateo County, CA | [Turnkey 60-Year Dry Cleaner in San Mateo County](https://www.bizbuysell.com/business-opportunity/turnkey-60-year-dry-cleaner-in-san-mateo-county/2395498/) |
