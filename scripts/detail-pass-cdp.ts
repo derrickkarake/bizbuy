@@ -18,6 +18,7 @@ const CSV_PATH = path.resolve(__dirname, '../data/shortlist-v2.csv');
 const RAW_DIR = path.resolve(__dirname, '../data/raw/detail');
 const NAV_DELAY_MS = 6500;
 const TARGET_NON_MEMO = 30;
+const STATE_FILTER = new Set(['texas', 'oklahoma', 'arkansas']); // narrow to home ring
 
 type Row = {
   score: number;
@@ -111,15 +112,17 @@ async function main() {
   }));
 
   // --- pick targets ---
-  const memoRows = rows.filter((r) => /memo-sourced|memo-verified/.test(r.flags));
+  // Skip rows that already have detail-scraped or delisted flag — we have them.
   const nonMemoCandidates = rows
     .filter((r) => !/memo-sourced|memo-verified/.test(r.flags))
+    .filter((r) => !/detail-scraped|delisted-404/.test(r.flags))
     .filter((r) => r.ask === null)
+    .filter((r) => STATE_FILTER.has(r.state))
     .sort((a, b) => b.score - a.score)
     .slice(0, TARGET_NON_MEMO);
 
-  const targets = [...memoRows, ...nonMemoCandidates];
-  console.log(`targets: ${memoRows.length} memo + ${nonMemoCandidates.length} non-memo = ${targets.length}`);
+  const targets = nonMemoCandidates;
+  console.log(`targets: ${nonMemoCandidates.length} TX/OK/AR rows missing asking price`);
 
   // --- connect CDP ---
   console.log('connecting to ws://localhost:9222...');
